@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qu77mgrgda34"]
+
+[ext_resource type="Script" uid="uid://r47641undtjb" path="res://components/Source/ray.gd" id="1_dq16b"]
+
+[node name="Ray" type="Line2D" groups=["ray"]]
+width = 3.0
+default_color = Color(4.235506e-06, 0.9757318, 0.982474, 1)
+script = ExtResource("1_dq16b")

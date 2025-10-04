@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://crqm1gp070yj8"]
+
+[ext_resource type="Texture2D" uid="uid://du3qw37wp3lwh" path="res://assets/grab1.png" id="1_p04t7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v5ih"]
+size = Vector2(120.83335, 129.16666)
+
+[node name="Grab" type="Area2D"]
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(2, -2)
+scale = Vector2(1, 0.69148934)
+texture = ExtResource("1_p04t7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.083335, -2.0833373)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_5v5ih")

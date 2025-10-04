@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5b4kmyq4areg"]
+
+[ext_resource type="Texture2D" uid="uid://c1ninf7k0v1e4" path="res://components/collector/collector.png" id="1_4u7ju"]
+[ext_resource type="Script" uid="uid://chuf0yr3tvn6t" path="res://components/collector/collector.gd" id="1_714qv"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="3_df70a"]
+
+[node name="Collector" type="StaticBody2D" groups=["collector"]]
+collision_layer = 16
+collision_mask = 16
+script = ExtResource("1_714qv")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(1, -12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_4u7ju")
+
+[node name="PointLight2D" type="PointLight2D" parent="Visual"]
+visible = false
+position = Vector2(-2, -34)
+enabled = false
+color = Color(0.827451, 0.41568628, 0.92941177, 1)
+energy = 0.2
+texture = ExtResource("3_df70a")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-1, -2)
+polygon = PackedVector2Array(-44, -4, -23, -20, 1, -24, 26, -20, 48, -3)

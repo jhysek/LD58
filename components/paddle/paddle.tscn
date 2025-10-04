@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn7mr3bwjjilc"]
+
+[ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_1hevo"]
+[ext_resource type="Texture2D" uid="uid://csd7f2kxvpc2l" path="res://components/paddle/paddle.png" id="2_kwoxf"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_lcsei"]
+[ext_resource type="Resource" uid="uid://dah5lu3pog4ou" path="res://components/behaviors/draggable.tres" id="3_xem4r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1hevo"]
+size = Vector2(479, 95)
+
+[node name="Paddle" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.3254902)
+offset_left = -594.0
+offset_top = -11.0
+offset_right = 589.0
+offset_bottom = 16.0
+
+[node name="Paddle" type="CharacterBody2D" parent="." node_paths=PackedStringArray("grab") groups=["bouncy"]]
+script = ExtResource("1_1hevo")
+grab = NodePath("../Grab")
+behaviors = Array[ExtResource("2_lcsei")]([ExtResource("3_xem4r")])
+
+[node name="Visual" type="Sprite2D" parent="Paddle"]
+texture = ExtResource("2_kwoxf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Paddle"]
+polygon = PackedVector2Array(-237, -43, 237, -46, 169, -16, -166, -13)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Paddle"]
+position = Vector2(-4, 52.42891)
+scale = Vector2(1, 0.8320313)
+polygon = PackedVector2Array(-158, -41.379345, 175, -40.177467, 241, -7.7267647, -233, -6.524887)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Paddle"]
+collision_layer = 32
+collision_mask = 32
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Paddle/StaticBody2D"]
+polygon = PackedVector2Array(-238, -43, -238, 47, -159, 14, -161, -11)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Paddle/StaticBody2D"]
+position = Vector2(398, -3)
+polygon = PackedVector2Array(-226, -15, -224, 16, -160, 49, -160, -43)
+
+[node name="Grab" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+position = Vector2(0.5, 3.5)
+shape = SubResource("RectangleShape2D_1hevo")
+
+[connection signal="input_event" from="Grab" to="Paddle" method="_on_grab_input_event"]

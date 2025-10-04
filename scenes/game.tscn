@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://c26ji0hvkb1ro"]
+
+[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://da4hulvgjj6pk" path="res://components/Fog/Fog.tscn" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="3_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://d0dfnp2u1hk0p" path="res://assets/noise-gray.png" id="3_vtaks"]
+[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="4_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="6_vtaks"]
+[ext_resource type="PackedScene" uid="uid://hvdgipr7f6tl" path="res://components/center_ring/ring_3.tscn" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://dn7mr3bwjjilc" path="res://components/paddle/paddle.tscn" id="8_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="8_gee14"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_uwrxv")
+
+[node name="Screen" type="CanvasLayer" parent="."]
+
+[node name="Vignette" parent="Screen" instance=ExtResource("2_lnu2h")]
+
+[node name="TextureRect" type="TextureRect" parent="Screen"]
+self_modulate = Color(0.28627452, 0.28627452, 0.28627452, 0.2509804)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_vtaks")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Fog" parent="." instance=ExtResource("3_lbhrr")]
+custom_minimum_size = Vector2(100, 100)
+offset_left = -656.0
+offset_top = -545.0
+offset_right = 704.0
+offset_bottom = 437.0
+
+[node name="Circle" parent="." instance=ExtResource("3_u5sy4")]
+
+[node name="Collector" parent="Circle" instance=ExtResource("8_gee14")]
+position = Vector2(-250.00002, 2)
+rotation = 1.5627997
+
+[node name="Collector2" parent="Circle" instance=ExtResource("8_gee14")]
+position = Vector2(125, 215.99998)
+rotation = -0.45486233
+
+[node name="Chevron" parent="Circle" instance=ExtResource("6_vtaks")]
+position = Vector2(1, -251)
+
+[node name="Chevron2" parent="Circle" instance=ExtResource("6_vtaks")]
+position = Vector2(252.00003, 6)
+rotation = 1.5707964
+
+[node name="Chevron3" parent="Circle" instance=ExtResource("6_vtaks")]
+position = Vector2(-251, -3)
+rotation = 4.712389
+
+[node name="Chevron4" parent="Circle" instance=ExtResource("6_vtaks")]
+position = Vector2(6, 253)
+rotation = 3.1159499
+
+[node name="Source" parent="." instance=ExtResource("2_yqjtg")]
+number_of_rays = 3
+
+[node name="Button" type="Button" parent="."]
+offset_left = -536.0
+offset_top = -282.0
+offset_right = -416.0
+offset_bottom = -247.0
+text = "Rotate"
+
+[node name="Line2D" type="Line2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.5411765)
+points = PackedVector2Array(152, -113, -170, -118, -180, -111, -181, -103, -177, -95, -166, -93, 163, -87, 171, -96, 169, -107, 155, -113)
+width = 3.0
+default_color = Color(0.043039158, 0.04303915, 0.04303915, 1)
+
+[node name="Block" parent="." node_paths=PackedStringArray("binded_elements") instance=ExtResource("4_lbhrr")]
+position = Vector2(-168.99997, -104.000015)
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+collision_mask = 2
+binded_elements = [NodePath("../Block2")]
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.01, 0.01)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(-98354, -66938, 122252, -70912, 118156, 77312, -101876, 71296, -98347, -67683, -99113, -67647, -102321, 72368, 120264, 78281, 122973, -71879, -98327, -67682)
+
+[node name="Block2" parent="." node_paths=PackedStringArray("binded_elements") instance=ExtResource("4_lbhrr")]
+position = Vector2(157.99994, -100.99999)
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+collision_mask = 2
+binded_elements = [NodePath("../Block")]
+
+[node name="Ring3" parent="." instance=ExtResource("7_u5sy4")]
+
+[node name="Paddle" parent="." instance=ExtResource("8_0tnpc")]
+position = Vector2(-100.99999, -48.999996)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

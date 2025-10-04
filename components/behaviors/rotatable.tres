@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Rotatable" load_steps=2 format=3 uid="uid://rp47idd1mtfy"]
+
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="1_gpcc3"]
+
+[resource]
+resource_name = "rotation"
+script = ExtResource("1_gpcc3")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"

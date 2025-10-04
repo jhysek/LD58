@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="BehaviorResource" load_steps=2 format=3 uid="uid://bq60u4f74jrkq"]
+
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="1_cuwmu"]
+
+[resource]
+script = ExtResource("1_cuwmu")

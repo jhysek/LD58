@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://hvdgipr7f6tl"]
+
+[ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_5bdyd"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_64def"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_nfo0y"]
+[ext_resource type="Texture2D" uid="uid://du3qw37wp3lwh" path="res://assets/grab1.png" id="5_nfo0y"]
+[ext_resource type="Texture2D" uid="uid://dxy6qiyij4ldx" path="res://components/center_ring/block.png" id="6_xpuuy"]
+
+[sub_resource type="Resource" id="Resource_nfo0y"]
+resource_name = "rotation"
+script = ExtResource("3_nfo0y")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpuuy"]
+size = Vector2(9.5, 22)
+
+[node name="Ring3" type="CharacterBody2D" node_paths=PackedStringArray("grab") groups=["bouncy"]]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_5bdyd")
+grab = NodePath("Grab")
+behaviors = Array[ExtResource("2_64def")]([SubResource("Resource_nfo0y")])
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(-97, -156, -1, -1, -178, 22, -75, 165, -2, 1, 78, 162, 180, 19, -1, 2, 85, -155)
+closed = true
+default_color = Color(0.70980394, 0.70980394, 0.70980394, 0.38039216)
+
+[node name="Block1" type="Sprite2D" parent="."]
+position = Vector2(-4, -139)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_xpuuy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
+
+[node name="Block2" type="CharacterBody2D" parent="." groups=["bouncy"]]
+rotation = 2.2098305
+collision_layer = 4
+collision_mask = 4
+
+[node name="Block2" type="Sprite2D" parent="Block2"]
+position = Vector2(-4, -139)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_xpuuy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2"]
+polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
+
+[node name="Block3" type="CharacterBody2D" parent="." groups=["bouncy"]]
+rotation = 4.103025
+collision_layer = 4
+collision_mask = 4
+
+[node name="Block2" type="Sprite2D" parent="Block3"]
+position = Vector2(-4, -139)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_xpuuy")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block3"]
+polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
+
+[node name="Grab" type="Area2D" parent="." groups=["bouncy"]]
+position = Vector2(0, -181)
+rotation = 1.5707964
+
+[node name="Sprite2D" type="Sprite2D" parent="Grab"]
+self_modulate = Color(1, 1, 1, 0.70980394)
+scale = Vector2(0.080882184, 0.09095745)
+texture = ExtResource("5_nfo0y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_xpuuy")
+
+[connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://0ph1416mbkin"]
+
+[ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_ngwfw"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_0vh0o"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_0vh0o"]
+[ext_resource type="Texture2D" uid="uid://c3mx7vsivnjo6" path="res://components/Block/triangle.png" id="4_0vh0o"]
+
+[sub_resource type="Resource" id="Resource_vi1tr"]
+resource_name = "rotation"
+script = ExtResource("3_0vh0o")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0vh0o"]
+radius = 127.00394
+
+[node name="Block" type="CharacterBody2D" groups=["bouncy"]]
+rotation = -0.008702602
+script = ExtResource("1_ngwfw")
+behaviors = Array[ExtResource("2_0vh0o")]([SubResource("Resource_vi1tr")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(2.4273176, -32.965588)
+polygon = PackedVector2Array(1, -154, -194, 157, 196, 156)
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(-0.20243168, 0.91539)
+texture = ExtResource("4_0vh0o")
+offset = Vector2(-1.4929051, -35.93147)
+
+[node name="Grab" type="Area2D" parent="."]
+position = Vector2(-2, 11)
+rotation = 0.086805105
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
+shape = SubResource("CircleShape2D_0vh0o")
+
+[connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]
