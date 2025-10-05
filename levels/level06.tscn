@@ -1,0 +1,216 @@
+[gd_scene load_steps=24 format=3 uid="uid://re83nirdmit4"]
+
+[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_fy4ed"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_j2t4w"]
+[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_q3yi1"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_j0040"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_f5t13"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_revqi"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_4q5g3"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="8_twqgr"]
+[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="10_ialv6"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="11_yuolv"]
+[ext_resource type="PackedScene" uid="uid://cxvvhwojliis1" path="res://components/blocker/blocker.tscn" id="12_plqi5"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="13_x0b3i"]
+[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="14_twxar"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="15_mqvgg"]
+
+[sub_resource type="Shader" id="Shader_2fkce"]
+code = "shader_type canvas_item;
+//render_mode unshaded; // optional
+
+// Noise texture
+uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+// Fog density
+uniform float density: hint_range(0.0, 1.0) = 0.25;
+// Fog speed
+uniform vec2 speed = vec2(0.02, 0.01);
+
+
+// Called for every pixel the material is visible on
+void fragment() {
+	// Make the fog slowly move
+	vec2 uv = UV + speed * TIME;
+	// Sample the noise texture
+	float noise = texture(noise_texture, uv).r;
+	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
+	// and clamp it between 0.0 and 1.0 again
+	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	// Apply the fog effect
+	COLOR.a *= fog * density;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rqdcb"]
+noise = SubResource("FastNoiseLite_vtaks")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dinhu"]
+shader = SubResource("Shader_2fkce")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_rqdcb")
+shader_parameter/density = 0.1170000055575
+shader_parameter/speed = Vector2(0, -0.02)
+
+[sub_resource type="Resource" id="Resource_fk2yf"]
+resource_name = "rotation"
+script = ExtResource("13_x0b3i")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="Resource" id="Resource_plqi5"]
+resource_name = "rotation"
+script = ExtResource("13_x0b3i")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="Resource" id="Resource_fy4ed"]
+resource_name = "rotation"
+script = ExtResource("13_x0b3i")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="Resource" id="Resource_j2t4w"]
+resource_name = "rotation"
+script = ExtResource("13_x0b3i")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[sub_resource type="Resource" id="Resource_q3yi1"]
+resource_name = "rotation"
+script = ExtResource("13_x0b3i")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_fy4ed")
+
+[node name="Screen" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Vignette" parent="Screen" instance=ExtResource("2_j2t4w")]
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.01, 0.01)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(-98354, -66938, 122252, -70912, 118156, 77312, -101876, 71296, -98347, -67683, -99113, -67647, -102321, 72368, 120264, 78281, 122973, -71879, -98327, -67682)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.59717613, 0.59717613, 0.5971761, 1)
+light_mask = 17
+visibility_layer = 17
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -855.0
+offset_top = -854.0
+offset_right = 806.0
+offset_bottom = 774.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(858, 871)
+mouse_filter = 2
+texture = ExtResource("3_q3yi1")
+stretch_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+range_item_cull_mask = 16
+texture = ExtResource("4_j0040")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dinhu")
+custom_minimum_size = Vector2(100, 100)
+offset_left = -656.0
+offset_top = -545.0
+offset_right = 704.0
+offset_bottom = 437.0
+
+[node name="Circle" parent="." instance=ExtResource("5_f5t13")]
+
+[node name="Collector" parent="Circle" instance=ExtResource("6_revqi")]
+position = Vector2(9.536743e-07, -250.99997)
+rotation = 3.1333597
+
+[node name="Chevron2" parent="Circle" instance=ExtResource("7_4q5g3")]
+position = Vector2(252.00003, 6)
+rotation = 1.5707964
+
+[node name="Chevron3" parent="Circle" instance=ExtResource("7_4q5g3")]
+position = Vector2(-251, -3)
+rotation = 4.712389
+
+[node name="Chevron4" parent="Circle" instance=ExtResource("7_4q5g3")]
+position = Vector2(1.0000021, -253)
+rotation = 6.2952013
+
+[node name="Machine" type="Node2D" parent="."]
+
+[node name="Source" parent="Machine" instance=ExtResource("8_twqgr")]
+number_of_rays = 1
+start_angle = 90
+
+[node name="Line2D" type="Line2D" parent="Machine"]
+position = Vector2(-1, 0)
+points = PackedVector2Array(-151, -136, 154, -135, 164, -123, 158, -114, 147, -110, -151, -112, -162, -122, -154, -132)
+width = 5.0
+default_color = Color(0.14117648, 0.14117648, 0.14117648, 0.76862746)
+
+[node name="Block" parent="Machine" instance=ExtResource("10_ialv6")]
+position = Vector2(-152, 98)
+rotation = 0.0
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_fk2yf")])
+
+[node name="Block2" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("10_ialv6")]
+position = Vector2(-150, -124)
+rotation = 0.0
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_plqi5")])
+binded_elements = [NodePath("../Block4")]
+
+[node name="Block3" parent="Machine" instance=ExtResource("10_ialv6")]
+position = Vector2(164, 90)
+rotation = 0.0
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_fy4ed")])
+
+[node name="Block4" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("10_ialv6")]
+position = Vector2(150, -124)
+rotation = 0.0
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_j2t4w")])
+binded_elements = [NodePath("../Block2")]
+
+[node name="Block5" parent="Machine" instance=ExtResource("10_ialv6")]
+position = Vector2(3.0000153, 189.99997)
+rotation = -3.137052
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_q3yi1")])
+
+[node name="Blocker" parent="Machine" instance=ExtResource("12_plqi5")]
+self_modulate = Color(0.5911141, 0.591114, 0.59111404, 1)
+position = Vector2(66, -36)
+rotation = 0.90167135
+scale = Vector2(0.2, 0.2)
+
+[node name="Blocker2" parent="Machine" instance=ExtResource("12_plqi5")]
+position = Vector2(-73, -35.000004)
+rotation = 2.2485995
+scale = Vector2(0.2, 0.2)
+
+[node name="MusicVolume" parent="." instance=ExtResource("14_twxar")]
+offset_left = 492.0
+offset_top = -285.0
+offset_right = 532.0
+offset_bottom = -245.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="Sfx" parent="." instance=ExtResource("15_mqvgg")]
+
+[connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

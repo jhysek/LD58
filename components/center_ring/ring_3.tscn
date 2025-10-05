@@ -24,7 +24,7 @@ behaviors = Array[ExtResource("2_64def")]([SubResource("Resource_nfo0y")])
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(-97, -156, -1, -1, -178, 22, -75, 165, -2, 1, 78, 162, 180, 19, -1, 2, 85, -155)
 closed = true
-default_color = Color(0.70980394, 0.70980394, 0.70980394, 0.38039216)
+default_color = Color(0.70980394, 0.70980394, 0.70980394, 0.05882353)
 
 [node name="Block1" type="Sprite2D" parent="."]
 position = Vector2(-4, -139)

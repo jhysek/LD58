@@ -1,19 +1,19 @@
-[gd_scene load_steps=21 format=3 uid="uid://0roeo12fj0oj"]
+[gd_scene load_steps=21 format=3 uid="uid://b4xjs0iexec3a"]
 
-[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_2fkce"]
-[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_rqdcb"]
-[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_0j27q"]
-[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_tdng2"]
-[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_osxv8"]
-[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_873k1"]
-[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_srsp4"]
-[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="8_h3skp"]
-[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="9_1jxxp"]
-[ext_resource type="PackedScene" uid="uid://bbirt5xjmgu6r" path="res://components/bouncy_circle/bouncy_block.tscn" id="9_dqrp8"]
-[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="10_nf8ca"]
-[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="13_42w8j"]
-[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="14_2fkce"]
-[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="14_t3isr"]
+[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_ho4s2"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_1gfio"]
+[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_lpcka"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_gkbmy"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_ma3h5"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_kwtec"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_k5rdb"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="8_mkt5n"]
+[ext_resource type="PackedScene" uid="uid://bbirt5xjmgu6r" path="res://components/bouncy_circle/bouncy_block.tscn" id="9_2u1kl"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="10_swmp8"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="11_jiu4y"]
+[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="12_630gs"]
+[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="13_phif5"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="14_k7lp2"]
 
 [sub_resource type="Shader" id="Shader_2fkce"]
 code = "shader_type canvas_item;
@@ -55,21 +55,21 @@ shader_parameter/speed = Vector2(0, -0.02)
 
 [sub_resource type="Resource" id="Resource_nlg5r"]
 resource_name = "rotation"
-script = ExtResource("10_nf8ca")
+script = ExtResource("11_jiu4y")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [sub_resource type="Resource" id="Resource_2fkce"]
 resource_name = "rotation"
-script = ExtResource("10_nf8ca")
+script = ExtResource("11_jiu4y")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_2fkce")
+script = ExtResource("1_ho4s2")
 
 [node name="Screen" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="Vignette" parent="Screen" instance=ExtResource("2_rqdcb")]
+[node name="Vignette" parent="Screen" instance=ExtResource("2_1gfio")]
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2(1, 0)
@@ -93,14 +93,14 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(858, 871)
 mouse_filter = 2
-texture = ExtResource("3_0j27q")
+texture = ExtResource("3_lpcka")
 stretch_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 16
 visibility_layer = 16
 range_item_cull_mask = 16
-texture = ExtResource("4_tdng2")
+texture = ExtResource("4_gkbmy")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -112,70 +112,70 @@ offset_top = -545.0
 offset_right = 704.0
 offset_bottom = 437.0
 
-[node name="Circle" parent="." instance=ExtResource("5_osxv8")]
+[node name="Circle" parent="." instance=ExtResource("5_ma3h5")]
 
-[node name="Collector" parent="Circle" instance=ExtResource("6_873k1")]
+[node name="Collector" parent="Circle" instance=ExtResource("6_kwtec")]
 position = Vector2(9.536743e-07, -250.99997)
 rotation = 3.1333597
 
-[node name="Chevron2" parent="Circle" instance=ExtResource("7_srsp4")]
+[node name="Chevron2" parent="Circle" instance=ExtResource("7_k5rdb")]
 position = Vector2(252.00003, 6)
 rotation = 1.5707964
 
-[node name="Chevron3" parent="Circle" instance=ExtResource("7_srsp4")]
+[node name="Chevron3" parent="Circle" instance=ExtResource("7_k5rdb")]
 position = Vector2(-251, -3)
 rotation = 4.712389
 
-[node name="Chevron4" parent="Circle" instance=ExtResource("7_srsp4")]
+[node name="Chevron4" parent="Circle" instance=ExtResource("7_k5rdb")]
 position = Vector2(1.0000021, -253)
-rotation = 6.2952013
+rotation = 6.2952013000000004
 
 [node name="Machine" type="Node2D" parent="."]
 
-[node name="Source" parent="Machine" instance=ExtResource("13_42w8j")]
+[node name="Source" parent="Machine" instance=ExtResource("8_mkt5n")]
 number_of_rays = 3
 start_angle = -90
 
-[node name="BouncyBlock" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_dqrp8")]
+[node name="BouncyBlock" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
 rotation = -0.47570032
 scale = Vector2(0.3, 0.3)
 binded_elements = [NodePath("../BouncyBlock2"), NodePath("../BouncyBlock3")]
 
-[node name="BouncyBlock2" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_dqrp8")]
+[node name="BouncyBlock2" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
 rotation = 1.6744795
 scale = Vector2(0.3, 0.3)
 binded_elements = [NodePath("../BouncyBlock"), NodePath("../BouncyBlock3")]
 
-[node name="BouncyBlock3" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_dqrp8")]
+[node name="BouncyBlock3" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
 rotation = -2.5505817
 scale = Vector2(0.3, 0.3)
 binded_elements = [NodePath("../BouncyBlock"), NodePath("../BouncyBlock2")]
 
-[node name="BouncyBlock4" parent="Machine" instance=ExtResource("9_dqrp8")]
+[node name="BouncyBlock4" parent="Machine" instance=ExtResource("9_2u1kl")]
 rotation = 0.73708826
 scale = Vector2(0.6, 0.6)
-behaviors = Array[ExtResource("9_1jxxp")]([SubResource("Resource_nlg5r")])
+behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_nlg5r")])
 
-[node name="Block3" parent="Machine/BouncyBlock4" instance=ExtResource("8_h3skp")]
+[node name="Block3" parent="Machine/BouncyBlock4" instance=ExtResource("12_630gs")]
 show_behind_parent = true
 position = Vector2(-10.000002, -281.66666)
 rotation = 3.131897
 scale = Vector2(0.29999998, 0.29999998)
-behaviors = Array[ExtResource("9_1jxxp")]([])
+behaviors = Array[ExtResource("10_swmp8")]([])
 
-[node name="BouncyBlock5" parent="Machine" instance=ExtResource("9_dqrp8")]
+[node name="BouncyBlock5" parent="Machine" instance=ExtResource("9_2u1kl")]
 rotation = 5.512599
 scale = Vector2(0.6, 0.6)
-behaviors = Array[ExtResource("9_1jxxp")]([SubResource("Resource_2fkce")])
+behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_2fkce")])
 
-[node name="Block4" parent="Machine/BouncyBlock5" instance=ExtResource("8_h3skp")]
+[node name="Block4" parent="Machine/BouncyBlock5" instance=ExtResource("12_630gs")]
 show_behind_parent = true
 position = Vector2(6.480174, -291.8992)
 rotation = 1.0996863
 scale = Vector2(0.3, 0.3)
-behaviors = Array[ExtResource("9_1jxxp")]([])
+behaviors = Array[ExtResource("10_swmp8")]([])
 
-[node name="MusicVolume" parent="." instance=ExtResource("14_t3isr")]
+[node name="MusicVolume" parent="." instance=ExtResource("13_phif5")]
 offset_left = 492.0
 offset_top = -285.0
 offset_right = 532.0
@@ -185,7 +185,7 @@ offset_bottom = -245.0
 wait_time = 2.5
 one_shot = true
 
-[node name="Sfx" parent="." instance=ExtResource("14_2fkce")]
+[node name="Sfx" parent="." instance=ExtResource("14_k7lp2")]
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
