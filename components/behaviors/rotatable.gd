@@ -17,11 +17,17 @@ func on_input(event):
 			
 	elif event is InputEventMouseMotion and rotating:
 		var diff = (event.relative.x - event.relative.y) * sensitivity
-		character.rotation -= diff
+		if character.rotation_parent != null:
+			character.rotation_parent.rotation -= diff
+		else:
+			character.rotation -= diff
 		
 		rotate_binded(diff)
 		character.on_changed()
 
 func rotate_binded(diff):
 	for elem in character.binded_elements:
-		elem.rotation -= diff
+		if elem.rotation_parent != null:
+			elem.rotation_parent.rotation -= diff
+		else:
+			elem.rotation -= diff

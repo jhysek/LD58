@@ -20,10 +20,13 @@ config/icon="res://icon.svg"
 
 Transition="*res://components/Transition/Transition.tscn"
 Music="*res://components/Music/music.tscn"
+LevelSwitcher="*res://LevelSwitcher.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://dyuejxo24f78g"
+mouse_cursor/tooltip_position_offset=Vector2(0, 0)
 
 [global_group]
 
@@ -31,6 +34,8 @@ collector=""
 ray=""
 bouncy=""
 chevron=""
+rotate=""
+rotate_backwards=""
 
 [rendering]
 

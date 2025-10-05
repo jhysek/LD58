@@ -4,15 +4,23 @@ extends BehaviorResource
 @export var max_limit = 100
 @export var min_limit = -100
 @export var sensitivity = 1.0
+@export var direction = Vector2(1, 0) 
 
 var dragging = false
-var direction = Vector2(1, 0) 
+
 var start_position: Vector2
 
 func on_ready(parent):
 	super(parent)
+	draw_line()
 	start_position = character.global_position
 
+func draw_line():
+	var line = character.line
+	line.add_point(character.global_position + direction.normalized() * min_limit)
+	line.add_point(character.global_position + direction.normalized() * max_limit)
+	line.reparent(character.get_parent())
+	
 func on_grab_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		dragging = event.pressed

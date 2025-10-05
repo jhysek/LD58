@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt2fr1gsx1yfd"]
+
+[ext_resource type="Texture2D" uid="uid://3cdhc4125tfl" path="res://assets/circle.png" id="1_bvgg2"]
+[ext_resource type="Texture2D" uid="uid://bwp5keuw1k27y" path="res://assets/circle-decorations2.png" id="2_ea3x5"]
+
+[node name="InnerCircle" type="Sprite2D"]
+self_modulate = Color(0.6255971, 0.6255971, 0.6255971, 0.6745098)
+scale = Vector2(0.192, 0.192)
+texture = ExtResource("1_bvgg2")
+
+[node name="InnerDecorations" type="Sprite2D" parent="."]
+modulate = Color(0.24658787, 0.2465879, 0.24658784, 1)
+texture = ExtResource("2_ea3x5")

@@ -1,26 +1,55 @@
-[gd_scene load_steps=3 format=3 uid="uid://kcwxx1xt8up2"]
+[gd_scene load_steps=12 format=3 uid="uid://kcwxx1xt8up2"]
 
 [ext_resource type="Script" uid="uid://dsbbs6n1t25p5" path="res://scenes/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="2_vjb58"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="3_con2f"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="4_mhnvy"]
+[ext_resource type="PackedScene" uid="uid://hvdgipr7f6tl" path="res://components/center_ring/ring_3.tscn" id="5_4ytvr"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_g3eks"]
+[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="7_v86rl"]
+
+[sub_resource type="Shader" id="25"]
+code = "shader_type canvas_item;
+//render_mode unshaded; // optional
+
+// Noise texture
+uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+// Fog density
+uniform float density: hint_range(0.0, 1.0) = 0.25;
+// Fog speed
+uniform vec2 speed = vec2(0.02, 0.01);
+
+
+// Called for every pixel the material is visible on
+void fragment() {
+	// Make the fog slowly move
+	vec2 uv = UV + speed * TIME;
+	// Sample the noise texture
+	float noise = texture(noise_texture, uv).r;
+	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
+	// and clamp it between 0.0 and 1.0 again
+	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	// Apply the fog effect
+	COLOR.a *= fog * density;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mhnvy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kvpfn"]
+noise = SubResource("FastNoiseLite_mhnvy")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ytvr"]
+shader = SubResource("25")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_kvpfn")
+shader_parameter/density = 0.1170000055575
+shader_parameter/speed = Vector2(0, -0.02)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_yqeox")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Title" type="Label" parent="."]
-offset_left = -517.0
-offset_top = -267.0
-offset_right = -147.0
-offset_bottom = -154.0
-text = "The Game"
-
-[node name="Start" type="Button" parent="."]
-offset_left = -513.0
-offset_top = -158.0
-offset_right = -352.0
-offset_bottom = -113.0
-text = "Start"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -50,7 +79,53 @@ offset_top = 25.0
 offset_right = -25.0
 offset_bottom = 65.0
 grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="Fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_4ytvr")
+custom_minimum_size = Vector2(100, 100)
+offset_left = -656.0
+offset_top = -545.0
+offset_right = 704.0
+offset_bottom = 437.0
+mouse_filter = 2
+
+[node name="OuterCircle" parent="." instance=ExtResource("3_con2f")]
+position = Vector2(2, 321)
+scale = Vector2(1.2, 1.2)
+enable_rotation = false
+
+[node name="Chevron" parent="OuterCircle" instance=ExtResource("4_mhnvy")]
+position = Vector2(-1, -250)
+
+[node name="Ring3" parent="OuterCircle" instance=ExtResource("5_4ytvr")]
+rotation = -1.050017
+
+[node name="Collector" parent="OuterCircle" instance=ExtResource("6_g3eks")]
+position = Vector2(-1.0000002, -250.99997)
+rotation = -3.1361804
+
+[node name="Title" type="Label" parent="."]
+offset_left = -517.0
+offset_top = -267.0
+offset_right = -147.0
+offset_bottom = -154.0
+theme = ExtResource("7_v86rl")
+theme_override_font_sizes/font_size = 50
+text = "COLLECTOR"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Start" type="Button" parent="."]
+offset_left = -513.0
+offset_top = -158.0
+offset_right = -352.0
+offset_bottom = -113.0
+text = "Start"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

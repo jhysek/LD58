@@ -5,6 +5,7 @@ const GROUP_COLLECTOR = "collector"
 
 @export var cast_length = 600
 
+
 var max_iterations = 10
 var angle = 0
 var parent: Node2D
@@ -15,12 +16,14 @@ var collector = null
 var endpoint = Vector2.ZERO
 
 @onready var space_state = get_world_2d().direct_space_state
+@onready var particles = $particles
 
 func initialize(parent_source, cast_angle_degrees):
 	endpoint = parent_source.global_position
 	parent = parent_source
 	angle = cast_angle_degrees
 	clear_points()
+	particles.emitting = false
 	add_point(endpoint)
 	
 func cast():
@@ -51,6 +54,9 @@ func cast():
 			
 		# if hit to non-bouncy collider, stop bouncing
 		if !hit.collider.is_in_group(GROUP_BOUNCY):
+			particles.global_position = hit.position
+			particles.visible = true 
+			particles.emitting = true
 			break
 
 		angle = rad_to_deg(hit.reflected_angle)

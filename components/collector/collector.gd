@@ -3,8 +3,6 @@ extends StaticBody2D
 
 var beams: Dictionary = {}
 
-@onready var light = $Visual/PointLight2D
-
 func set_beam(id, on):
 	beams[str(id)] = on
 
@@ -25,9 +23,9 @@ func beam_count():
 	return result
 
 func set_enabled():
-	light.energy = 1
-	light.color = Color("16de2bff")	
+	$Visual/Light.show()
+	$Visual/Surface.self_modulate = Color("88ffffff")
 	
 func set_disabled():
-	light.energy = 0.2
-	light.color = Color("d36aedff")	
+	$Visual/Light.hide()
+	$Visual/Surface.self_modulate = Color("ffffff33")

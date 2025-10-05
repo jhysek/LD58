@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://0ph1416mbkin"]
+[gd_scene load_steps=8 format=3 uid="uid://0ph1416mbkin"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_ngwfw"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_0vh0o"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_0vh0o"]
 [ext_resource type="Texture2D" uid="uid://c3mx7vsivnjo6" path="res://components/Block/triangle.png" id="4_0vh0o"]
+[ext_resource type="Script" uid="uid://85brna7kpl0d" path="res://components/Grab/grab.gd" id="5_vi1tr"]
 
 [sub_resource type="Resource" id="Resource_vi1tr"]
 resource_name = "rotation"
@@ -30,8 +31,11 @@ offset = Vector2(-1.4929051, -35.93147)
 [node name="Grab" type="Area2D" parent="."]
 position = Vector2(-2, 11)
 rotation = 0.086805105
+script = ExtResource("5_vi1tr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
 shape = SubResource("CircleShape2D_0vh0o")
 
 [connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]
+[connection signal="mouse_entered" from="Grab" to="Grab" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Grab" to="Grab" method="_on_mouse_exited"]

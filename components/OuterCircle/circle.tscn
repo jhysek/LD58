@@ -1,37 +1,147 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqxbl5g2mq8ux"]
+[gd_scene load_steps=16 format=3 uid="uid://bqxbl5g2mq8ux"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="2_jumii"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="3_g5ifr"]
 [ext_resource type="Resource" uid="uid://rp47idd1mtfy" path="res://components/behaviors/rotatable.tres" id="4_njolb"]
-[ext_resource type="PackedScene" uid="uid://cyr21t2v8e6io" path="res://components/OuterCircle/inner_circle.tscn" id="5_5v5ih"]
+[ext_resource type="Texture2D" uid="uid://3cdhc4125tfl" path="res://assets/circle.png" id="4_r8tuq"]
 [ext_resource type="PackedScene" uid="uid://crqm1gp070yj8" path="res://components/Grab/grab.tscn" id="5_jumii"]
+[ext_resource type="Texture2D" uid="uid://bsokp6yjle1wc" path="res://assets/circle-decorations.png" id="5_yf6va"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="6_v37tc"]
 [ext_resource type="Texture2D" uid="uid://0fip565wl7mb" path="res://assets/noise2.png" id="7_g5ifr"]
+[ext_resource type="PackedScene" uid="uid://bt2fr1gsx1yfd" path="res://components/inner_circle/inner_circle.tscn" id="8_r8tuq"]
+[ext_resource type="Texture2D" uid="uid://cd5i1nvji8qy5" path="res://components/Coq/coq.png" id="10_yf6va"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g5ifr"]
 blend_mode = 3
 
-[node name="OuterCircle" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_r8tuq"]
+resource_name = "Finish"
+
+[sub_resource type="Animation" id="Animation_yf6va"]
+resource_name = "Pulsate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Grab:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.9999999, 0.9999999), Vector2(1.2, 1.2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Grab2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.9999999, 0.9999999), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_v37tc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Grab:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.9999999, 0.9999999)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Grab2:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.9999999, 0.9999999)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yf6va"]
+_data = {
+&"Finish": SubResource("Animation_r8tuq"),
+&"Pulsate": SubResource("Animation_yf6va"),
+&"RESET": SubResource("Animation_v37tc")
+}
+
+[node name="OuterCircle" type="CharacterBody2D" node_paths=PackedStringArray("grab")]
 script = ExtResource("2_jumii")
+grab = NodePath("Visual/Grab")
 behaviors = Array[ExtResource("3_g5ifr")]([ExtResource("4_njolb")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(1, -249, 25, -247, 47, -244, 69, -239, 90, -232, 114, -221, 133, -210, 151, -198, 171, -180, 187, -164, 208, -137, 228, -100, 242, -59, 246, -35, 248, -15, 248, 13, 245, 45, 239, 71, 229, 97, 217, 122, 203, 144, 190, 161, 174, 178, 143, 204, 121, 217, 100, 228, 78, 236, 52, 244, 23, 248, 0, 249, -27, 247, -50, 244, -76, 237, -98, 229, -119, 218, -139, 207, -162, 189, -179, 173, -197, 152, -215, 127, -228, 100, -237, 74, -246, 37, -249, -3, -247, -28, -244, -47, -240, -65, -234, -84, -228, -100, -218, -120, -197, -152, -181, -171, -168, -183, -156, -194, -133, -211, -88, -233, -45, -245, -23, -248, 1, -249, 0, -311, -135, -281, -273, -154, -303, 61, -205, 234, 0, 313, 187, 249, 297, 101, 301, -83, 200, -241, 108, -293, 1, -311, 1, -251)
 
-[node name="Visual" parent="." instance=ExtResource("5_5v5ih")]
-
-[node name="Grab" parent="." instance=ExtResource("5_jumii")]
-position = Vector2(197.99998, 192)
-rotation = 0.8859985
+[node name="Visual" type="Sprite2D" parent="."]
+clip_children = 2
 scale = Vector2(0.24, 0.24)
+texture = ExtResource("4_r8tuq")
+
+[node name="Decoration" type="Sprite2D" parent="Visual"]
+self_modulate = Color(0.007843138, 0.007843138, 0.007843138, 0.20784314)
+scale = Vector2(0.9999999, 0.9999999)
+texture = ExtResource("5_yf6va")
+
+[node name="PointLight2D" type="PointLight2D" parent="Visual"]
+position = Vector2(12.5, -12.5)
+color = Color(0, 1, 1, 1)
+texture = ExtResource("6_v37tc")
+texture_scale = 2.0
+
+[node name="Grab" parent="Visual" instance=ExtResource("5_jumii")]
+position = Vector2(824.9999, 800)
+rotation = 0.7171469
+scale = Vector2(0.9999999, 0.9999999)
+
+[node name="Grab2" parent="Visual" instance=ExtResource("5_jumii")]
+position = Vector2(-629.1669, -983.3335)
+rotation = 0.96723175
+scale = Vector2(0.9999999, 0.9999999)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.3372549)
 material = SubResource("CanvasItemMaterial_g5ifr")
 offset_left = -1065.0
-offset_top = -665.0
+offset_top = -664.99994
 offset_right = 1029.0
-offset_bottom = 729.0
+offset_bottom = 729.00006
 texture = ExtResource("7_g5ifr")
 stretch_mode = 1
 
-[connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]
+[node name="InnerCircle" parent="." instance=ExtResource("8_r8tuq")]
+
+[node name="Coq" type="Sprite2D" parent="." groups=["rotate"]]
+self_modulate = Color(1, 1, 1, 0.5411765)
+position = Vector2(-0.30400085, -0.6518402)
+scale = Vector2(0.288, 0.27648002)
+texture = ExtResource("10_yf6va")
+
+[node name="Coq2" type="Sprite2D" parent="." groups=["rotate_backwards"]]
+self_modulate = Color(1, 1, 1, 0.5411765)
+position = Vector2(43.696, 43.348175)
+scale = Vector2(0.288, 0.27648002)
+texture = ExtResource("10_yf6va")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yf6va")
+}
+
+[connection signal="input_event" from="Visual/Grab" to="." method="_on_grab_input_event"]
+[connection signal="input_event" from="Visual/Grab2" to="." method="_on_grab_input_event"]

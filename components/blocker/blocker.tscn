@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxvvhwojliis1"]
+
+[ext_resource type="Texture2D" uid="uid://ct7v5ugmyfcht" path="res://components/blocker/blocker-9.png" id="1_1ocxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f5jmm"]
+size = Vector2(803, 94)
+
+[node name="Blocker" type="StaticBody2D"]
+
+[node name="Visual" type="Sprite2D" parent="."]
+texture = ExtResource("1_1ocxp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1)
+shape = SubResource("RectangleShape2D_f5jmm")

@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c2u68cvn6q7d6"]
+
+[ext_resource type="FontFile" uid="uid://dhdgcdmg5t578" path="res://assets/bebas.otf" id="1_5x3i2"]
+
+[resource]
+default_font = ExtResource("1_5x3i2")
