@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://d01suqvxqrtbi"]
+
+[ext_resource type="AudioStream" uid="uid://dvi6sd6aej5e8" path="res://assets/collector_enabled.wav" id="1_m778e"]
+[ext_resource type="AudioStream" uid="uid://bioibmrayybyd" path="res://assets/machine_working.wav" id="2_vxwl7"]
+[ext_resource type="AudioStream" uid="uid://dypvdfcps4l0q" path="res://assets/mechanical2.wav" id="3_vxwl7"]
+
+[node name="Sfx" type="Node"]
+
+[node name="Collector" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_m778e")
+volume_db = -10.018
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vxwl7")
+volume_db = -6.679
+autoplay = true
+
+[node name="Finished" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vxwl7")

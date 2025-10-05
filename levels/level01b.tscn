@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://i3x78bqyfc74"]
+[gd_scene load_steps=25 format=3 uid="uid://i3x78bqyfc74"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_6oia5"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_vsr8y"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bb7lfwi0214tp" path="res://draggable.gd" id="13_ni847"]
 [ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="14_u4204"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="15_4nmuw"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="16_vsr8y"]
 
 [sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
@@ -177,6 +178,8 @@ theme = ExtResource("8_6nx31")
 text = "ROTATING
 OUTER  CIRCLE
 WORKS  TOO"
+
+[node name="Sfx" parent="." instance=ExtResource("16_vsr8y")]
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

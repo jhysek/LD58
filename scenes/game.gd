@@ -1,10 +1,15 @@
 extends Node2D
 
 signal on_scene_changed
+var cursor = load("res://assets/cursor-6.png")
 
 @onready var source = $Machine/Source
 
+var beams = 0
+var disabled = false
+
 func _ready():
+	Input.set_custom_mouse_cursor(cursor)
 	$Screen.show()
 	Transition.openScene()
 
@@ -28,8 +33,11 @@ func _on_on_scene_changed() -> void:
 	
 	for collector in get_tree().get_nodes_in_group("collector"):
 		result += collector.beam_count()
-			
-	print("COLLECTED BEAMS: " + str(result))
+	
+	if beams < result:
+		$Sfx/Collector.play()
+		
+	beams = result
 	
 	lock_chevrons(result)
 
@@ -47,7 +55,11 @@ func lock_chevrons(number):
 		level_finished()
 		
 func level_finished():
+	Input.set_custom_mouse_cursor(cursor)
+	disabled = true
+
 	$Timer.start()
 
 func _on_timer_timeout() -> void:
+	$Sfx/Finished.play()
 	LevelSwitcher.next_level()

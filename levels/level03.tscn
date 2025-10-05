@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0roeo12fj0oj"]
+[gd_scene load_steps=21 format=3 uid="uid://0roeo12fj0oj"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_2fkce"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_rqdcb"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="10_nf8ca"]
 [ext_resource type="PackedScene" uid="uid://hvdgipr7f6tl" path="res://components/center_ring/ring_3.tscn" id="12_nlg5r"]
 [ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="13_42w8j"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="14_2fkce"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="14_t3isr"]
 
 [sub_resource type="Shader" id="Shader_2fkce"]
@@ -159,6 +160,8 @@ offset_bottom = -245.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Sfx" parent="." instance=ExtResource("14_2fkce")]
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

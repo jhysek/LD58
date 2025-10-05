@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bp5ghfj5xlmss"]
+[gd_scene load_steps=24 format=3 uid="uid://bp5ghfj5xlmss"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_icky8"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_1cnpy"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bb7lfwi0214tp" path="res://draggable.gd" id="13_etslh"]
 [ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="14_syqf8"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="15_18m02"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="15_icky8"]
 
 [sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
@@ -179,6 +180,8 @@ offset_bottom = -245.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Sfx" parent="." instance=ExtResource("15_icky8")]
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

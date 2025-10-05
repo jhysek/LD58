@@ -43,13 +43,18 @@ func _ready():
 
 
 func _process(delta):
+	if game && game.disabled:
+		return
 	for_each_behavior("on_process", delta)
 
 func _physics_process(delta):
+	if game && game.disabled:
+		return
 	for_each_behavior("on_physics_process", delta)
-	move_and_slide()
 
 func _input(event):
+	if game && game.disabled:
+		return
 	for_each_behavior("on_input", event)
 
 func for_each_behavior(function_name, argument = null):
@@ -78,8 +83,9 @@ func on_changed():
 	game.emit_signal("on_scene_changed")
 
 func _on_grab_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if game && game.disabled:
+		return
 	for_each_behavior("on_grab_input", event)
-
 
 func _on_grab_mouse_entered() -> void:
 	pass # Replace with function body.
