@@ -3,6 +3,7 @@ extends Node2D
 var Ray = preload("res://components/Source/ray.tscn")
 @export var number_of_rays:int = 6
 @export var rotate_speed = 50
+@export var start_angle = 0
 
 @onready var visual = $Visual
 @onready var ray_wrapper = $Rays
@@ -52,6 +53,6 @@ func cast_rays():
 	for number in range(number_of_rays):
 		var ray = Ray.instantiate()
 		ray_wrapper.add_child(ray)
-		ray.initialize(self, source_angle + number * angle_diff)
+		ray.initialize(self, start_angle + source_angle + number * angle_diff)
 		ray.cast()
 		rays.append(ray)

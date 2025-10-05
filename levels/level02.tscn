@@ -166,7 +166,7 @@ behaviors = Array[ExtResource("10_4md6k")]([SubResource("Resource_py2r8")])
 number_of_rays = 3
 
 [node name="Block" parent="Machine" instance=ExtResource("9_5asgi")]
-position = Vector2(-142, 2)
+position = Vector2(-130.99998, 0)
 rotation = 1.3089969
 scale = Vector2(0.2, 0.2)
 behaviors = Array[ExtResource("10_4md6k")]([SubResource("Resource_j5cmh")])

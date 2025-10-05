@@ -50,7 +50,7 @@ func lock_chevrons(number):
 			chevron.lock()
 		else:
 			chevron.unlock()
-		
+
 	if locked >= chevrons.size():
 		level_finished()
 		

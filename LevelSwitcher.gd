@@ -6,6 +6,8 @@ var levels = [
 	"res://levels/level01.tscn",
 	"res://levels/level01b.tscn",
 	"res://levels/level02.tscn",
+	"res://levels/level05.tscn",
+	"res://levels/finished.tscn",
 	"res://levels/finished.tscn"
 ]
 
@@ -29,6 +31,8 @@ func start_level():
 	Transition.switchTo(levels[current_level])
 
 func next_level():
+	print("Next level.... " + str(current_level + 1))
+	GlobalState.dragging = false
 	print("LEVEL: " + str(current_level) + " DONE")
 	current_level += 1
 

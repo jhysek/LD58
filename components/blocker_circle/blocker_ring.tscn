@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://iagogoxodntu"]
+
+[ext_resource type="Texture2D" uid="uid://dqmbaic3n51cj" path="res://components/blocker_circle/circle.png" id="1_bvf82"]
+[ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_cxksu"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_om87s"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_om87s"]
+[ext_resource type="PackedScene" uid="uid://crqm1gp070yj8" path="res://components/Grab/grab.tscn" id="3_wvwu1"]
+[ext_resource type="AudioStream" uid="uid://dx2lgtg6x5r3k" path="res://assets/clicking1.wav" id="7_8di4p"]
+
+[sub_resource type="Resource" id="Resource_k8wvm"]
+resource_name = "rotation"
+script = ExtResource("3_om87s")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[node name="BlockerRing" type="CharacterBody2D" node_paths=PackedStringArray("grab")]
+collision_layer = 64
+collision_mask = 64
+script = ExtResource("1_cxksu")
+grab = NodePath("Grab")
+behaviors = Array[ExtResource("2_om87s")]([SubResource("Resource_k8wvm")])
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-48, -366, -49, -310, -115, -295, -190, -252, -249, -194, -302, -99, -315, 8, -290, 129, -217, 236, -117, 299, -13, 317, 110, 299, 209, 240, 273, 162, 311, 54, 319, -47, 275, -149, 212, -230, 144, -280, 82, -301, 39, -311, 40, -366, 81, -362, 193, -322, 274, -249, 345, -148, 372, -46, 369, 75, 337, 171, 271, 259, 193, 322, 76, 364, 2, 374, -90, 363, -180, 329, -254, 274, -313, 199, -352, 108, -371, 6, -355, -99, -313, -196, -254, -270, -162, -331)
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_bvf82")
+
+[node name="Grab" parent="." instance=ExtResource("3_wvwu1")]
+position = Vector2(-1, 344)
+rotation = 1.5752234
+scale = Vector2(0.3, 0.3)
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("7_8di4p")
+pitch_scale = 0.91
+
+[connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]

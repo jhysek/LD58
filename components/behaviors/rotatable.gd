@@ -8,6 +8,11 @@ var grab = load("res://assets/drag-cursor.png")
 var rotating = false
 @export var sensitivity = 0.005
 
+func on_ready(parent):
+	print("ready...")
+	super(parent)
+	rotating = false
+	
 func on_grab_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:

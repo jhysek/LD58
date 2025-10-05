@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://byy2cqtwibtxt"]
 
-[ext_resource type="Shader" path="res://Components/Transition/Transition.gdshader" id="1_dni86"]
-[ext_resource type="Script" path="res://Components/Transition/Transition.gd" id="1_xbvxp"]
+[ext_resource type="Shader" uid="uid://bmst1fbgucrxp" path="res://components/Transition/Transition.gdshader" id="1_dni86"]
+[ext_resource type="Script" uid="uid://1cyw48kwmrkc" path="res://components/Transition/transition.gd" id="1_xfsfi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uotwk"]
 shader = ExtResource("1_dni86")
@@ -44,12 +44,12 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6w8qf"]
 _data = {
-"Fade": SubResource("Animation_pcj4n"),
-"RESET": SubResource("Animation_lo0f6")
+&"Fade": SubResource("Animation_pcj4n"),
+&"RESET": SubResource("Animation_lo0f6")
 }
 
 [node name="Transition" type="CanvasLayer"]
-script = ExtResource("1_xbvxp")
+script = ExtResource("1_xfsfi")
 
 [node name="Bg" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_uotwk")
@@ -62,7 +62,7 @@ mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_6w8qf")
+&"": SubResource("AnimationLibrary_6w8qf")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

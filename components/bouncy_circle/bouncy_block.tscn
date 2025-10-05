@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbirt5xjmgu6r"]
+
+[ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_0h4wx"]
+[ext_resource type="Texture2D" uid="uid://8vi34xfts5l3" path="res://components/bouncy_circle/block.png" id="1_pmhqh"]
+[ext_resource type="PackedScene" uid="uid://crqm1gp070yj8" path="res://components/Grab/grab.tscn" id="2_0h4wx"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_yhbqv"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_ysvfe"]
+[ext_resource type="AudioStream" uid="uid://dx2lgtg6x5r3k" path="res://assets/clicking1.wav" id="6_ysvfe"]
+
+[sub_resource type="Resource" id="Resource_g84ox"]
+resource_name = "rotation"
+script = ExtResource("3_ysvfe")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[node name="BouncyBlock" type="CharacterBody2D" node_paths=PackedStringArray("grab") groups=["bouncy"]]
+script = ExtResource("1_0h4wx")
+grab = NodePath("Grab")
+behaviors = Array[ExtResource("2_yhbqv")]([SubResource("Resource_g84ox")])
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -318)
+texture = ExtResource("1_pmhqh")
+
+[node name="Grab" parent="." instance=ExtResource("2_0h4wx")]
+position = Vector2(-1.2043699e-12, -339)
+rotation = 1.5707964
+scale = Vector2(0.3, 0.3)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-123, -285, -78, -301, -55, -307, -28, -309, 0, -310, 27, -309, 52, -305, 76, -300, 115, -287, 133, -338, 84, -355, 52, -362, 26, -365, -15, -366, -46, -364, -74, -359, -100, -353, -126, -345)
+
+[node name="Block" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block"]
+polygon = PackedVector2Array(-125, -284, -154, -272, -189, -316, -127, -344)
+
+[node name="Block2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2"]
+polygon = PackedVector2Array(151, -272, 114, -286, 136, -340, 188, -310)
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("6_ysvfe")
+pitch_scale = 1.04
+
+[connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]

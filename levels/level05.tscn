@@ -1,19 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://c26ji0hvkb1ro"]
+[gd_scene load_steps=23 format=3 uid="uid://brmpfhejs2drf"]
 
-[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_uwrxv"]
-[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_lnu2h"]
-[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="2_yqjtg"]
-[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="3_u5sy4"]
-[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="4_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="6_vtaks"]
-[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="8_gee14"]
-[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="11_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://bbirt5xjmgu6r" path="res://components/bouncy_circle/bouncy_block.tscn" id="12_dinhu"]
-[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="13_ir15t"]
-[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="13_kvuet"]
-[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="14_ca42v"]
+[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_d767c"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_4at6m"]
+[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_lolrl"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_nw3fi"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_77icf"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_dxhn6"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_22oxf"]
+[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="8_aohh7"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="9_oe6ua"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="10_vt0mt"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="11_4464b"]
+[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="12_21u0o"]
+[ext_resource type="PackedScene" uid="uid://bbirt5xjmgu6r" path="res://components/bouncy_circle/bouncy_block.tscn" id="13_acfmm"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="14_65sxm"]
 
 [sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
@@ -55,30 +55,30 @@ shader_parameter/speed = Vector2(0, -0.02)
 
 [sub_resource type="Resource" id="Resource_ir15t"]
 resource_name = "rotation"
-script = ExtResource("14_ca42v")
+script = ExtResource("10_vt0mt")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [sub_resource type="Resource" id="Resource_ca42v"]
 resource_name = "rotation"
-script = ExtResource("14_ca42v")
+script = ExtResource("10_vt0mt")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [sub_resource type="Resource" id="Resource_rysoc"]
 resource_name = "rotation"
-script = ExtResource("14_ca42v")
+script = ExtResource("10_vt0mt")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [sub_resource type="Resource" id="Resource_ssvqc"]
 resource_name = "rotation"
-script = ExtResource("14_ca42v")
+script = ExtResource("10_vt0mt")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_uwrxv")
+script = ExtResource("1_d767c")
 
 [node name="Screen" type="CanvasLayer" parent="."]
 
-[node name="Vignette" parent="Screen" instance=ExtResource("2_lnu2h")]
+[node name="Vignette" parent="Screen" instance=ExtResource("2_4at6m")]
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 position = Vector2(1, 0)
@@ -102,14 +102,14 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(858, 871)
 mouse_filter = 2
-texture = ExtResource("3_kvpfn")
+texture = ExtResource("3_lolrl")
 stretch_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 light_mask = 16
 visibility_layer = 16
 range_item_cull_mask = 16
-texture = ExtResource("4_kvpfn")
+texture = ExtResource("4_nw3fi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -121,56 +121,57 @@ offset_top = -545.0
 offset_right = 704.0
 offset_bottom = 437.0
 
-[node name="Circle" parent="." instance=ExtResource("3_u5sy4")]
+[node name="Circle" parent="." instance=ExtResource("5_77icf")]
 enable_rotation = false
 
-[node name="Collector2" parent="Circle" instance=ExtResource("8_gee14")]
+[node name="Collector2" parent="Circle" instance=ExtResource("6_dxhn6")]
 position = Vector2(0.9999999, -254.00002)
 rotation = -3.1443167
 
-[node name="Chevron" parent="Circle" instance=ExtResource("6_vtaks")]
+[node name="Chevron" parent="Circle" instance=ExtResource("7_22oxf")]
 position = Vector2(1, -251)
 
 [node name="Machine" type="Node2D" parent="."]
 
-[node name="Block" parent="Machine" instance=ExtResource("4_lbhrr")]
+[node name="Block" parent="Machine" instance=ExtResource("8_aohh7")]
 position = Vector2(0, -191)
 rotation = -0.0072024465
 scale = Vector2(0.18, 0.18)
 collision_layer = 2
 collision_mask = 2
-behaviors = Array[ExtResource("13_ir15t")]([SubResource("Resource_ir15t")])
+behaviors = Array[ExtResource("9_oe6ua")]([SubResource("Resource_ir15t")])
 
-[node name="Block2" parent="Machine" instance=ExtResource("4_lbhrr")]
+[node name="Block2" parent="Machine" instance=ExtResource("8_aohh7")]
 position = Vector2(2, 201)
 rotation = -3.1500986
 scale = Vector2(0.2, 0.2)
 collision_layer = 2
 collision_mask = 2
-behaviors = Array[ExtResource("13_ir15t")]([SubResource("Resource_ca42v")])
+behaviors = Array[ExtResource("9_oe6ua")]([SubResource("Resource_ca42v")])
 
-[node name="Source" parent="Machine" instance=ExtResource("2_yqjtg")]
+[node name="Source" parent="Machine" instance=ExtResource("11_4464b")]
 number_of_rays = 1
 start_angle = -90
 
-[node name="BlockerRing" parent="Machine" instance=ExtResource("11_kvpfn")]
+[node name="BlockerRing" parent="Machine" instance=ExtResource("12_21u0o")]
 position = Vector2(-1, 2)
 rotation = 3.1369455
 scale = Vector2(0.4, 0.4)
 
-[node name="BouncyBlock" parent="Machine" instance=ExtResource("12_dinhu")]
+[node name="BouncyBlock" parent="Machine" instance=ExtResource("13_acfmm")]
 position = Vector2(0.99999994, 0)
 rotation = 1.5183834
 scale = Vector2(0.66, 0.66)
-behaviors = Array[ExtResource("13_ir15t")]([SubResource("Resource_rysoc")])
+behaviors = Array[ExtResource("9_oe6ua")]([SubResource("Resource_rysoc")])
 
-[node name="BouncyBlock2" parent="Machine" instance=ExtResource("12_dinhu")]
+[node name="BouncyBlock2" parent="Machine" instance=ExtResource("13_acfmm")]
 rotation = 4.7460794
 scale = Vector2(0.66, 0.66)
-behaviors = Array[ExtResource("13_ir15t")]([SubResource("Resource_ssvqc")])
+behaviors = Array[ExtResource("9_oe6ua")]([SubResource("Resource_ssvqc")])
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Sfx" parent="." instance=ExtResource("13_kvuet")]
+[node name="Sfx" parent="." instance=ExtResource("14_65sxm")]
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

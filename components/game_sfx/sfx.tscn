@@ -12,7 +12,6 @@ volume_db = -10.018
 
 [node name="Ambient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_vxwl7")
-volume_db = -6.679
 autoplay = true
 
 [node name="Finished" type="AudioStreamPlayer" parent="."]

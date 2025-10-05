@@ -1,8 +1,6 @@
 extends StaticBody2D
 
-
 var beams: Dictionary = {}
-@onready var sfx = $Sfx/Click
 
 func set_beam(id, on):
 	beams[str(id)] = on
