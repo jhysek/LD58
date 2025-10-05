@@ -37,7 +37,6 @@ func _ready():
 	for_each_behavior("on_ready", self)
 
 
-
 func _process(delta):
 	for_each_behavior("on_process", delta)
 

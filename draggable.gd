@@ -1,6 +1,10 @@
 class_name Draggable
 extends BehaviorResource
 
+
+var cursor = load("res://assets/cursor-6.png")
+var drag = load("res://assets/drag-cursor.png")
+
 @export var max_limit = 100
 @export var min_limit = -100
 @export var sensitivity = 1.0
@@ -23,10 +27,15 @@ func draw_line():
 	
 func on_grab_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		Input.set_custom_mouse_cursor(drag)
+		character.grab.dragging = true
 		dragging = event.pressed
 
 func on_input(event):
 	if event is InputEventMouseButton and !event.pressed:
+		print("setting normal cursor")
+		Input.set_custom_mouse_cursor(cursor)
+		character.grab.dragging = false
 		dragging = false
 
 	elif event is InputEventMouseMotion and dragging:
