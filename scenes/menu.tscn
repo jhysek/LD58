@@ -1,12 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://kcwxx1xt8up2"]
+[gd_scene load_steps=17 format=3 uid="uid://kcwxx1xt8up2"]
 
 [ext_resource type="Script" uid="uid://dsbbs6n1t25p5" path="res://scenes/menu.gd" id="1_yqeox"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="2_vjb58"]
 [ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="3_con2f"]
 [ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="4_mhnvy"]
-[ext_resource type="PackedScene" uid="uid://hvdgipr7f6tl" path="res://components/center_ring/ring_3.tscn" id="5_4ytvr"]
+[ext_resource type="Texture2D" uid="uid://cd5i1nvji8qy5" path="res://components/Coq/coq.png" id="4_mj5lg"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="6_70i5f"]
 [ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_g3eks"]
 [ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="7_v86rl"]
+[ext_resource type="FontFile" uid="uid://cv2ttld2pgrrl" path="res://assets/Steamwreck-07pd.ttf" id="8_13sgg"]
+[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="9_70i5f"]
+[ext_resource type="AudioStream" uid="uid://dcldrvbm6b3bb" path="res://assets/click.wav" id="9_i6lef"]
 
 [sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
@@ -46,6 +50,15 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_kvpfn")
 shader_parameter/density = 0.1170000055575
 shader_parameter/speed = Vector2(0, -0.02)
 
+[sub_resource type="Environment" id="Environment_13sgg"]
+glow_enabled = true
+glow_intensity = 0.24
+glow_bloom = 0.15
+adjustment_enabled = true
+adjustment_brightness = 1.17
+adjustment_contrast = 1.05
+adjustment_saturation = 0.44
+
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_yqeox")
 
@@ -54,6 +67,7 @@ script = ExtResource("1_yqeox")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Info" type="Label" parent="CanvasLayer"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.5254902)
 anchors_preset = 3
 anchor_left = 1.0
@@ -93,28 +107,43 @@ offset_bottom = 437.0
 mouse_filter = 2
 
 [node name="OuterCircle" parent="." instance=ExtResource("3_con2f")]
-position = Vector2(2, 321)
+position = Vector2(2, 348)
 scale = Vector2(1.2, 1.2)
 enable_rotation = false
 
+[node name="Coq3" type="Sprite2D" parent="OuterCircle" groups=["rotate"]]
+self_modulate = Color(1, 1, 1, 0.3764706)
+position = Vector2(-49.999992, -40.833324)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_mj5lg")
+
 [node name="Chevron" parent="OuterCircle" instance=ExtResource("4_mhnvy")]
 position = Vector2(-1, -250)
-
-[node name="Ring3" parent="OuterCircle" instance=ExtResource("5_4ytvr")]
-rotation = -1.050017
 
 [node name="Collector" parent="OuterCircle" instance=ExtResource("6_g3eks")]
 position = Vector2(-1.0000002, -250.99997)
 rotation = -3.1361804
 
+[node name="Source" parent="OuterCircle" instance=ExtResource("6_70i5f")]
+number_of_rays = 3
+start_angle = -90
+
+[node name="Line2D" type="Line2D" parent="OuterCircle/Source"]
+position = Vector2(-3.3333333, -1.6666666)
+points = PackedVector2Array(0.8333334, -25.833344, 1.6666666, -225)
+width = 3.0
+default_color = Color(0.45490196, 1, 1, 1)
+
 [node name="Title" type="Label" parent="."]
-offset_left = -573.0
-offset_top = -275.0
-offset_right = 577.0
-offset_bottom = -162.0
+self_modulate = Color(0.6973565, 0.604338, 0.36816832, 1)
+offset_left = -583.0
+offset_top = -289.0
+offset_right = 567.0
+offset_bottom = -163.0
 theme = ExtResource("7_v86rl")
-theme_override_font_sizes/font_size = 50
-text = "COLLECTOR"
+theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_font_sizes/font_size = 100
+text = "CLOCKWORK COLLECTOR"
 horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
@@ -122,11 +151,26 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Start" type="Button" parent="."]
-offset_left = -77.0
-offset_top = -177.0
-offset_right = 84.0
-offset_bottom = -132.0
+self_modulate = Color(0.6, 0.56078434, 0.45490196, 1)
+offset_left = -80.0
+offset_top = -156.0
+offset_right = 81.0
+offset_bottom = -111.0
+theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_font_sizes/font_size = 40
 text = "Start"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_13sgg")
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Click" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("9_i6lef")
+
+[node name="BlockerRing" parent="." instance=ExtResource("9_70i5f")]
+position = Vector2(0, 350)
+scale = Vector2(0.6, 0.6)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

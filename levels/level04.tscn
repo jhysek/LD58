@@ -128,7 +128,7 @@ rotation = 4.712389
 
 [node name="Chevron4" parent="Circle" instance=ExtResource("7_k5rdb")]
 position = Vector2(1.0000021, -253)
-rotation = 6.2952013000000004
+rotation = 6.2952013
 
 [node name="Machine" type="Node2D" parent="."]
 

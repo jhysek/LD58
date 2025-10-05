@@ -22,6 +22,7 @@ position = Vector2(0, -318)
 texture = ExtResource("1_pmhqh")
 
 [node name="Grab" parent="." instance=ExtResource("2_0h4wx")]
+self_modulate = Color(0.45840502, 0.45840508, 0.45840502, 1)
 position = Vector2(-1.2043699e-12, -339)
 rotation = 1.5707964
 scale = Vector2(0.3, 0.3)

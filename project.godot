@@ -13,7 +13,7 @@ config_version=5
 config/name="LD58"
 run/main_scene="uid://kcwxx1xt8up2"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-boot_splash/image="uid://c1c2kn7niqgyk"
+boot_splash/image="uid://du60g7f6lpr53"
 config/icon="res://icon.svg"
 
 [autoload]
