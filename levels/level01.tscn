@@ -209,17 +209,6 @@ rotation = 1.3089969
 scale = Vector2(0.2, 0.2)
 behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_ta2wi")])
 
-[node name="Info" type="Label" parent="."]
-self_modulate = Color(1, 1, 1, 0.9843137)
-offset_left = -498.0
-offset_top = -123.0
-offset_right = -138.0
-offset_bottom = 30.0
-theme = ExtResource("8_wrqhy")
-text = "REDIRECT   BEAMS  
-TO   COLLECTOR
-"
-
 [node name="MusicVolume" parent="." instance=ExtResource("15_6q0d3")]
 offset_left = 492.0
 offset_top = -285.0
@@ -227,7 +216,6 @@ offset_right = 532.0
 offset_bottom = -245.0
 
 [node name="Collector2" type="Label" parent="."]
-self_modulate = Color(1, 1, 1, 0.64705884)
 offset_left = -495.0
 offset_top = -28.0
 offset_right = -395.0

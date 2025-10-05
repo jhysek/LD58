@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b4xjs0iexec3a"]
+[gd_scene load_steps=23 format=3 uid="uid://b4xjs0iexec3a"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_ho4s2"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_1gfio"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_k5rdb"]
 [ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="8_mkt5n"]
 [ext_resource type="PackedScene" uid="uid://bbirt5xjmgu6r" path="res://components/bouncy_circle/bouncy_block.tscn" id="9_2u1kl"]
+[ext_resource type="PackedScene" uid="uid://hvdgipr7f6tl" path="res://components/center_ring/ring_3.tscn" id="9_jdr1m"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="10_swmp8"]
+[ext_resource type="PackedScene" uid="uid://dn7mr3bwjjilc" path="res://components/paddle/paddle.tscn" id="11_ho4s2"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="11_jiu4y"]
 [ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="12_630gs"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="13_phif5"]
@@ -53,12 +55,12 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_rqdcb")
 shader_parameter/density = 0.1170000055575
 shader_parameter/speed = Vector2(0, -0.02)
 
-[sub_resource type="Resource" id="Resource_nlg5r"]
+[sub_resource type="Resource" id="Resource_lpcka"]
 resource_name = "rotation"
 script = ExtResource("11_jiu4y")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
 
-[sub_resource type="Resource" id="Resource_2fkce"]
+[sub_resource type="Resource" id="Resource_gkbmy"]
 resource_name = "rotation"
 script = ExtResource("11_jiu4y")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
@@ -117,6 +119,11 @@ offset_bottom = 437.0
 [node name="Collector" parent="Circle" instance=ExtResource("6_kwtec")]
 position = Vector2(9.536743e-07, -250.99997)
 rotation = 3.1333597
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Collector2" parent="Circle" instance=ExtResource("6_kwtec")]
+position = Vector2(-3, 252)
+rotation = 0.005358821
 
 [node name="Chevron2" parent="Circle" instance=ExtResource("7_k5rdb")]
 position = Vector2(252.00003, 6)
@@ -130,49 +137,47 @@ rotation = 4.712389
 position = Vector2(1.0000021, -253)
 rotation = 6.2952013
 
+[node name="Chevron5" parent="Circle" instance=ExtResource("7_k5rdb")]
+position = Vector2(0, 255)
+rotation = 9.403307
+
+[node name="Collector3" parent="Circle" instance=ExtResource("6_kwtec")]
+position = Vector2(-251.00002, 1)
+rotation = 1.5552067
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Collector4" parent="Circle" instance=ExtResource("6_kwtec")]
+position = Vector2(252, 4.0000005)
+rotation = -1.5532047
+scale = Vector2(0.99999994, 0.99999994)
+
 [node name="Machine" type="Node2D" parent="."]
 
 [node name="Source" parent="Machine" instance=ExtResource("8_mkt5n")]
-number_of_rays = 3
-start_angle = -90
+number_of_rays = 4
+start_angle = 45
 
-[node name="BouncyBlock" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
-rotation = -0.47570032
-scale = Vector2(0.3, 0.3)
-binded_elements = [NodePath("../BouncyBlock2"), NodePath("../BouncyBlock3")]
+[node name="Ring3" parent="Machine" instance=ExtResource("9_jdr1m")]
 
-[node name="BouncyBlock2" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
-rotation = 1.6744795
-scale = Vector2(0.3, 0.3)
-binded_elements = [NodePath("../BouncyBlock"), NodePath("../BouncyBlock3")]
+[node name="BouncyBlock" parent="Machine" instance=ExtResource("9_2u1kl")]
+scale = Vector2(0.65, 0.65)
+behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_lpcka")])
 
-[node name="BouncyBlock3" parent="Machine" node_paths=PackedStringArray("binded_elements") instance=ExtResource("9_2u1kl")]
-rotation = -2.5505817
-scale = Vector2(0.3, 0.3)
-binded_elements = [NodePath("../BouncyBlock"), NodePath("../BouncyBlock2")]
-
-[node name="BouncyBlock4" parent="Machine" instance=ExtResource("9_2u1kl")]
-rotation = 0.73708826
-scale = Vector2(0.6, 0.6)
-behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_nlg5r")])
-
-[node name="Block3" parent="Machine/BouncyBlock4" instance=ExtResource("12_630gs")]
+[node name="Paddle" parent="Machine/BouncyBlock" instance=ExtResource("11_ho4s2")]
 show_behind_parent = true
-position = Vector2(-10.000002, -281.66666)
-rotation = 3.131897
-scale = Vector2(0.29999998, 0.29999998)
+position = Vector2(-4.615385, -316.9231)
+scale = Vector2(0.3, 0.3)
 behaviors = Array[ExtResource("10_swmp8")]([])
 
-[node name="BouncyBlock5" parent="Machine" instance=ExtResource("9_2u1kl")]
-rotation = 5.512599
-scale = Vector2(0.6, 0.6)
-behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_2fkce")])
+[node name="BouncyBlock2" parent="Machine" instance=ExtResource("9_2u1kl")]
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("10_swmp8")]([SubResource("Resource_gkbmy")])
 
-[node name="Block4" parent="Machine/BouncyBlock5" instance=ExtResource("12_630gs")]
+[node name="Block3" parent="Machine/BouncyBlock2" instance=ExtResource("12_630gs")]
 show_behind_parent = true
-position = Vector2(6.480174, -291.8992)
-rotation = 1.0996863
-scale = Vector2(0.3, 0.3)
+position = Vector2(-4.9999986, -274.9999)
+rotation = 3.1306736
+scale = Vector2(0.49999997, 0.49999997)
 behaviors = Array[ExtResource("10_swmp8")]([])
 
 [node name="MusicVolume" parent="." instance=ExtResource("13_phif5")]

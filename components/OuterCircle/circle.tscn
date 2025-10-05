@@ -111,8 +111,8 @@ rotation = 0.71714693
 scale = Vector2(0.9999999, 0.9999999)
 
 [node name="Grab2" parent="Visual" instance=ExtResource("5_jumii")]
-position = Vector2(-616.6667, -983.3334)
-rotation = 0.96723175
+position = Vector2(-804.1667, -850)
+rotation = 0.7585741
 scale = Vector2(0.9999999, 0.9999999)
 
 [node name="TextureRect" type="TextureRect" parent="."]

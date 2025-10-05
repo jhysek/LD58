@@ -1,0 +1,177 @@
+[gd_scene load_steps=21 format=3 uid="uid://dqdne4a31sjxd"]
+
+[ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_jna71"]
+[ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_36etg"]
+[ext_resource type="Texture2D" uid="uid://dem6022hmghd4" path="res://assets/noise3.png" id="3_hib0i"]
+[ext_resource type="Texture2D" uid="uid://bb7qhvcpm6ap1" path="res://assets/light.png" id="4_b21wk"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_e5mp6"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_i2q5a"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_5jgas"]
+[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="8_dpt18"]
+[ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="9_j3khy"]
+[ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="10_equii"]
+[ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="11_4k01u"]
+[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="13_8ajap"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="14_5iaf4"]
+[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="15_cxwd4"]
+[ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="16_4uqx7"]
+
+[sub_resource type="Shader" id="25"]
+code = "shader_type canvas_item;
+//render_mode unshaded; // optional
+
+// Noise texture
+uniform sampler2D noise_texture: repeat_enable, filter_nearest;
+// Fog density
+uniform float density: hint_range(0.0, 1.0) = 0.25;
+// Fog speed
+uniform vec2 speed = vec2(0.02, 0.01);
+
+
+// Called for every pixel the material is visible on
+void fragment() {
+	// Make the fog slowly move
+	vec2 uv = UV + speed * TIME;
+	// Sample the noise texture
+	float noise = texture(noise_texture, uv).r;
+	// Convert the noise from the (0.0, 1.0) range to the (-1.0, 1.0) range
+	// and clamp it between 0.0 and 1.0 again
+	float fog = clamp(noise * 2.0 - 1.0, 0.0, 1.0);
+	// Apply the fog effect
+	COLOR.a *= fog * density;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vtaks"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kvpfn"]
+noise = SubResource("FastNoiseLite_vtaks")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dinhu"]
+shader = SubResource("25")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_kvpfn")
+shader_parameter/density = 0.1170000055575
+shader_parameter/speed = Vector2(0, -0.02)
+
+[sub_resource type="Resource" id="Resource_ta2wi"]
+resource_name = "rotation"
+script = ExtResource("11_4k01u")
+metadata/_custom_type_script = "uid://clf2nejfhwusp"
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_jna71")
+
+[node name="Screen" type="CanvasLayer" parent="."]
+
+[node name="Vignette" parent="Screen" instance=ExtResource("2_36etg")]
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2(1, 0)
+scale = Vector2(0.01, 0.01)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundaries"]
+polygon = PackedVector2Array(-98354, -66938, 122252, -70912, 118156, 77312, -101876, 71296, -98347, -67683, -99113, -67647, -102321, 72368, 120264, 78281, 122973, -71879, -98327, -67682)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.59717613, 0.59717613, 0.5971761, 1)
+light_mask = 17
+visibility_layer = 17
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -855.0
+offset_top = -854.0
+offset_right = 806.0
+offset_bottom = 774.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(858, 871)
+mouse_filter = 2
+texture = ExtResource("3_hib0i")
+stretch_mode = 1
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 16
+visibility_layer = 16
+range_item_cull_mask = 16
+texture = ExtResource("4_b21wk")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_dinhu")
+custom_minimum_size = Vector2(100, 100)
+offset_left = -656.0
+offset_top = -545.0
+offset_right = 704.0
+offset_bottom = 437.0
+
+[node name="Circle" parent="." instance=ExtResource("5_e5mp6")]
+enable_rotation = false
+
+[node name="Collector" parent="Circle" instance=ExtResource("6_i2q5a")]
+position = Vector2(9.536743e-07, -250.99997)
+rotation = 3.1333597
+
+[node name="Chevron2" parent="Circle" instance=ExtResource("7_5jgas")]
+position = Vector2(1.0000153, 252)
+rotation = 3.1629634
+
+[node name="Collector2" type="Label" parent="Circle"]
+offset_left = -36.0
+offset_top = -297.0
+offset_right = 38.0
+offset_bottom = -274.0
+theme = ExtResource("8_dpt18")
+text = "Collector"
+
+[node name="Line2D" type="Line2D" parent="Circle/Collector2"]
+position = Vector2(18.999998, 11.9999895)
+scale = Vector2(0.4848485, 0.5217391)
+points = PackedVector2Array(22, 29, 35.698837, 29, 45, 29, 33, 42, 22, 29)
+width = 5.0
+default_color = Color(1, 1, 1, 0.5411765)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Machine" type="Node2D" parent="."]
+
+[node name="Source" parent="Machine" instance=ExtResource("14_5iaf4")]
+number_of_rays = 2
+
+[node name="Block" parent="Machine" instance=ExtResource("9_j3khy")]
+position = Vector2(-165.99998, -3)
+rotation = 1.3089969
+scale = Vector2(0.2, 0.2)
+behaviors = Array[ExtResource("10_equii")]([SubResource("Resource_ta2wi")])
+
+[node name="BlockerRing" parent="Machine" instance=ExtResource("13_8ajap")]
+scale = Vector2(0.3, 0.3)
+
+[node name="Info" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.9843137)
+offset_left = -443.0
+offset_top = -25.0
+offset_right = -83.0
+offset_bottom = 128.0
+theme = ExtResource("8_dpt18")
+text = "REDIRECT   BEAMS  
+TO   COLLECTOR
+"
+
+[node name="MusicVolume" parent="." instance=ExtResource("15_cxwd4")]
+offset_left = 492.0
+offset_top = -285.0
+offset_right = 532.0
+offset_bottom = -245.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Sfx" parent="." instance=ExtResource("16_4uqx7")]
+
+[connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

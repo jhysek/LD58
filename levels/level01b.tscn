@@ -170,10 +170,10 @@ libraries = {
 }
 
 [node name="Label" type="Label" parent="."]
-offset_left = 263.0
-offset_top = 191.0
-offset_right = 380.0
-offset_bottom = 238.0
+offset_left = -453.0
+offset_top = -38.0
+offset_right = -336.0
+offset_bottom = 34.0
 theme = ExtResource("8_6nx31")
 text = "ROTATING
 OUTER  CIRCLE

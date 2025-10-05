@@ -27,9 +27,10 @@ position = Vector2(0, -1)
 texture = ExtResource("1_bvf82")
 
 [node name="Grab" parent="." instance=ExtResource("3_wvwu1")]
-position = Vector2(-1, 344)
+modulate = Color(0.32358363, 0.32358393, 0.32358363, 1)
+position = Vector2(-1, 343.00003)
 rotation = 1.5752234
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.4, 0.4)
 
 [node name="Sfx" type="Node" parent="."]
 

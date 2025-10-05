@@ -48,7 +48,7 @@ texture = ExtResource("6_xpuuy")
 polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
 
 [node name="Block3" type="CharacterBody2D" parent="." groups=["bouncy"]]
-rotation = 4.103025
+rotation = 4.1481895
 collision_layer = 4
 collision_mask = 4
 
