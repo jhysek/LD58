@@ -139,6 +139,7 @@ end_cap_mode = 2
 [node name="Machine" type="Node2D" parent="."]
 
 [node name="Source" parent="Machine" instance=ExtResource("14_5iaf4")]
+position = Vector2(0, -1)
 number_of_rays = 2
 
 [node name="Block" parent="Machine" instance=ExtResource("9_j3khy")]
@@ -157,7 +158,7 @@ offset_top = -25.0
 offset_right = -83.0
 offset_bottom = 128.0
 theme = ExtResource("8_dpt18")
-text = "REDIRECT   BEAMS  
+text = "REDIRECT   BEAM
 TO   COLLECTOR
 "
 

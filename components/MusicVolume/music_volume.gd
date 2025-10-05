@@ -1,7 +1,7 @@
 extends Control
 
-@onready var volume_control = $MusicVolumeControl
-@onready var button = $TextureButton
+@onready var volume_control
+@onready var button
 
 @export var hover_color = Color("ffffffff")
 @export var opened_color = Color("ffffffff")
@@ -9,6 +9,10 @@ extends Control
 
 var opened = false
 
+func _ready():
+	volume_control = $MusicVolumeControl
+	button = $TextureButton
+	
 func _on_h_slider_value_changed(value: float) -> void:
 	var bus_index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_linear(bus_index, $HSlider.value / 100.0)

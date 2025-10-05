@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://hvdgipr7f6tl"]
+[gd_scene load_steps=9 format=3 uid="uid://hvdgipr7f6tl"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_5bdyd"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_64def"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_nfo0y"]
 [ext_resource type="Texture2D" uid="uid://du3qw37wp3lwh" path="res://assets/grab1.png" id="5_nfo0y"]
 [ext_resource type="Texture2D" uid="uid://dxy6qiyij4ldx" path="res://components/center_ring/block.png" id="6_xpuuy"]
+[ext_resource type="AudioStream" uid="uid://dx2lgtg6x5r3k" path="res://assets/clicking1.wav" id="6_yx7y3"]
 
 [sub_resource type="Resource" id="Resource_nfo0y"]
 resource_name = "rotation"
@@ -34,6 +35,13 @@ texture = ExtResource("6_xpuuy")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
 
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+rotation = -0.0027987957
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D3"]
+polygon = PackedVector2Array(-91.55317, -145.01042, -96.737045, -148.63362, -97.10487, -155.83533, -91.67009, -163.61113, -42.980328, -183.59384, 7.041504, -188.37045, 53.601738, -179.36237, 83.14427, -166.43027, 89.108475, -158.40355, 83.261185, -147.82957, 54.2704, -149.95909, -79.71934, -152.55763)
+
 [node name="Block2" type="CharacterBody2D" parent="." groups=["bouncy"]]
 rotation = 2.2098305
 collision_layer = 4
@@ -46,6 +54,11 @@ texture = ExtResource("6_xpuuy")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2"]
 polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Block2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block2/StaticBody2D"]
+polygon = PackedVector2Array(-91.55317, -145.01042, -96.737045, -148.63362, -97.10487, -155.83533, -91.67009, -163.61113, -42.980328, -183.59384, 7.041504, -188.37045, 53.601738, -179.36237, 83.14427, -166.43027, 89.108475, -158.40355, 83.261185, -147.82957, 54.2704, -149.95909, -79.71934, -152.55763)
 
 [node name="Block3" type="CharacterBody2D" parent="." groups=["bouncy"]]
 rotation = 4.1481895
@@ -60,6 +73,13 @@ texture = ExtResource("6_xpuuy")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block3"]
 polygon = PackedVector2Array(-92, -144, 1, -92, 85, -146, 79, -151, 0, -99, -84, -148)
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="Block3"]
+rotation = -0.0019258261
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Block3/StaticBody2D2"]
+polygon = PackedVector2Array(-91.55317, -145.01042, -96.737045, -148.63362, -97.10487, -155.83533, -91.67009, -163.61113, -42.980328, -183.59384, 7.041504, -188.37045, 53.601738, -179.36237, 83.14427, -166.43027, 89.108475, -158.40355, 83.261185, -147.82957, 54.2704, -149.95909, -79.71934, -152.55763)
+
 [node name="Grab" type="Area2D" parent="." groups=["bouncy"]]
 position = Vector2(0, -181)
 rotation = 1.5707964
@@ -72,5 +92,11 @@ texture = ExtResource("5_nfo0y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
 position = Vector2(-0.25, 0)
 shape = SubResource("RectangleShape2D_xpuuy")
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("6_yx7y3")
+pitch_scale = 0.84
 
 [connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]

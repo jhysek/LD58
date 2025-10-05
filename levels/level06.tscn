@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://re83nirdmit4"]
+[gd_scene load_steps=25 format=3 uid="uid://re83nirdmit4"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_fy4ed"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_j2t4w"]
@@ -8,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_revqi"]
 [ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_4q5g3"]
 [ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="8_twqgr"]
+[ext_resource type="PackedScene" uid="uid://dn7mr3bwjjilc" path="res://components/paddle/paddle.tscn" id="9_p7tcv"]
 [ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="10_ialv6"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="11_yuolv"]
-[ext_resource type="PackedScene" uid="uid://cxvvhwojliis1" path="res://components/blocker/blocker.tscn" id="12_plqi5"]
+[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="12_plqi5"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="13_x0b3i"]
+[ext_resource type="Texture2D" uid="uid://dush1jskhv2xu" path="res://assets/particle.png" id="14_j2t4w"]
 [ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="14_twxar"]
 [ext_resource type="PackedScene" uid="uid://d01suqvxqrtbi" path="res://components/game_sfx/sfx.tscn" id="15_mqvgg"]
 
@@ -54,11 +56,6 @@ shader_parameter/density = 0.1170000055575
 shader_parameter/speed = Vector2(0, -0.02)
 
 [sub_resource type="Resource" id="Resource_fk2yf"]
-resource_name = "rotation"
-script = ExtResource("13_x0b3i")
-metadata/_custom_type_script = "uid://clf2nejfhwusp"
-
-[sub_resource type="Resource" id="Resource_plqi5"]
 resource_name = "rotation"
 script = ExtResource("13_x0b3i")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
@@ -128,28 +125,21 @@ offset_right = 704.0
 offset_bottom = 437.0
 
 [node name="Circle" parent="." instance=ExtResource("5_f5t13")]
+enable_rotation = false
 
 [node name="Collector" parent="Circle" instance=ExtResource("6_revqi")]
-position = Vector2(9.536743e-07, -250.99997)
-rotation = 3.1333597
+position = Vector2(252.00002, 10)
+rotation = 4.7382464
 
 [node name="Chevron2" parent="Circle" instance=ExtResource("7_4q5g3")]
 position = Vector2(252.00003, 6)
 rotation = 1.5707964
 
-[node name="Chevron3" parent="Circle" instance=ExtResource("7_4q5g3")]
-position = Vector2(-251, -3)
-rotation = 4.712389
-
-[node name="Chevron4" parent="Circle" instance=ExtResource("7_4q5g3")]
-position = Vector2(1.0000021, -253)
-rotation = 6.2952013
-
 [node name="Machine" type="Node2D" parent="."]
 
 [node name="Source" parent="Machine" instance=ExtResource("8_twqgr")]
 number_of_rays = 1
-start_angle = 90
+start_angle = -135
 
 [node name="Line2D" type="Line2D" parent="Machine"]
 position = Vector2(-1, 0)
@@ -167,8 +157,19 @@ behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_fk2yf")])
 position = Vector2(-150, -124)
 rotation = 0.0
 scale = Vector2(0.2, 0.2)
-behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_plqi5")])
+behaviors = Array[ExtResource("11_yuolv")]([])
 binded_elements = [NodePath("../Block4")]
+
+[node name="Paddle" parent="Machine/Block2" instance=ExtResource("9_p7tcv")]
+show_behind_parent = true
+position = Vector2(5.0000305, 104.999985)
+behaviors = Array[ExtResource("11_yuolv")]([])
+
+[node name="Particle" type="Sprite2D" parent="Machine/Block2"]
+self_modulate = Color(0.4257, 0.43, 0.43, 1)
+position = Vector2(-2.5, 10)
+scale = Vector2(5.1785707, 4.9999995)
+texture = ExtResource("14_j2t4w")
 
 [node name="Block3" parent="Machine" instance=ExtResource("10_ialv6")]
 position = Vector2(164, 90)
@@ -189,16 +190,8 @@ rotation = -3.137052
 scale = Vector2(0.2, 0.2)
 behaviors = Array[ExtResource("11_yuolv")]([SubResource("Resource_q3yi1")])
 
-[node name="Blocker" parent="Machine" instance=ExtResource("12_plqi5")]
-self_modulate = Color(0.5911141, 0.591114, 0.59111404, 1)
-position = Vector2(66, -36)
-rotation = 0.90167135
-scale = Vector2(0.2, 0.2)
-
-[node name="Blocker2" parent="Machine" instance=ExtResource("12_plqi5")]
-position = Vector2(-73, -35.000004)
-rotation = 2.2485995
-scale = Vector2(0.2, 0.2)
+[node name="BlockerRing" parent="Machine" instance=ExtResource("12_plqi5")]
+scale = Vector2(0.3, 0.3)
 
 [node name="MusicVolume" parent="." instance=ExtResource("14_twxar")]
 offset_left = 492.0

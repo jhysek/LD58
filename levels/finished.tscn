@@ -96,6 +96,122 @@ grow_horizontal = 0
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="Levels" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -75.0
+offset_top = 152.0
+offset_right = -35.0
+offset_bottom = 192.0
+grow_horizontal = 0
+
+[node name="play again" type="Label" parent="CanvasLayer/Levels"]
+self_modulate = Color(0.69803923, 0.6039216, 0.36862746, 1)
+layout_mode = 0
+offset_left = -94.0
+offset_top = 40.0
+offset_right = -12.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "play again"
+
+[node name="Buttons" type="Control" parent="CanvasLayer/Levels"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="1" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 40.0
+offset_right = 48.0
+offset_bottom = 83.0
+theme = ExtResource("8_qeak8")
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="2" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 93.0
+offset_right = 49.0
+offset_bottom = 136.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "2"
+
+[node name="3" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 145.0
+offset_right = 49.0
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "3"
+
+[node name="4" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 201.0
+offset_right = 49.0
+offset_bottom = 244.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "4"
+
+[node name="5" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 255.0
+offset_right = 49.0
+offset_bottom = 298.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "5"
+
+[node name="6" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 307.0
+offset_right = 49.0
+offset_bottom = 350.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "6"
+
+[node name="7" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 363.0
+offset_right = 49.0
+offset_bottom = 406.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "7"
+
+[node name="8" type="Button" parent="CanvasLayer/Levels/Buttons"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 417.0
+offset_right = 49.0
+offset_bottom = 460.0
+theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
+theme_override_fonts/font = ExtResource("9_pg6d8")
+theme_override_font_sizes/font_size = 30
+text = "8"
+
 [node name="Fog" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_4ytvr")
 custom_minimum_size = Vector2(100, 100)
@@ -185,5 +301,13 @@ environment = SubResource("Environment_13sgg")
 [node name="Click" type="AudioStreamPlayer" parent="Sfx"]
 stream = ExtResource("10_qm0km")
 
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/1" to="." method="openLevel" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/2" to="." method="openLevel" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/3" to="." method="openLevel" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/4" to="." method="openLevel" binds= [3]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/5" to="." method="openLevel" binds= [4]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/6" to="." method="openLevel" binds= [5]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/7" to="." method="openLevel" binds= [6]]
+[connection signal="pressed" from="CanvasLayer/Levels/Buttons/8" to="." method="openLevel" binds= [7]]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

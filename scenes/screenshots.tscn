@@ -1,16 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://kcwxx1xt8up2"]
+[gd_scene load_steps=17 format=3 uid="uid://dt163nhu7v3w7"]
 
-[ext_resource type="Script" uid="uid://dsbbs6n1t25p5" path="res://scenes/menu.gd" id="1_yqeox"]
-[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="2_vjb58"]
-[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="3_con2f"]
-[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="4_mhnvy"]
-[ext_resource type="Texture2D" uid="uid://cd5i1nvji8qy5" path="res://components/Coq/coq.png" id="4_mj5lg"]
-[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="6_70i5f"]
-[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_g3eks"]
-[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="7_v86rl"]
-[ext_resource type="FontFile" uid="uid://cv2ttld2pgrrl" path="res://assets/Steamwreck-07pd.ttf" id="8_13sgg"]
-[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="9_70i5f"]
-[ext_resource type="AudioStream" uid="uid://dcldrvbm6b3bb" path="res://assets/click.wav" id="9_i6lef"]
+[ext_resource type="Script" uid="uid://dsbbs6n1t25p5" path="res://scenes/menu.gd" id="1_cqxam"]
+[ext_resource type="PackedScene" uid="uid://ddg33gy842v6y" path="res://components/MusicVolume/music_volume.tscn" id="2_hu5mp"]
+[ext_resource type="FontFile" uid="uid://cv2ttld2pgrrl" path="res://assets/Steamwreck-07pd.ttf" id="3_j0e48"]
+[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="4_pn5dn"]
+[ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_sy34g"]
+[ext_resource type="Texture2D" uid="uid://cd5i1nvji8qy5" path="res://components/Coq/coq.png" id="6_83t6f"]
+[ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_h1vtx"]
+[ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="8_eaqdx"]
+[ext_resource type="PackedScene" uid="uid://dsvxyitdo575o" path="res://components/Source/source.tscn" id="9_t8y1r"]
+[ext_resource type="AudioStream" uid="uid://dcldrvbm6b3bb" path="res://assets/click.wav" id="10_j5env"]
+[ext_resource type="PackedScene" uid="uid://iagogoxodntu" path="res://components/blocker_circle/blocker_ring.tscn" id="11_4spa3"]
 
 [sub_resource type="Shader" id="25"]
 code = "shader_type canvas_item;
@@ -60,7 +60,7 @@ adjustment_contrast = 1.05
 adjustment_saturation = 0.44
 
 [node name="Menu" type="Node2D"]
-script = ExtResource("1_yqeox")
+script = ExtResource("1_cqxam")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -84,7 +84,8 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "Made in 48h for Ludum Dare compo by Jiri Hysek"
 
-[node name="MusicVolume" parent="CanvasLayer" instance=ExtResource("2_vjb58")]
+[node name="MusicVolume" parent="CanvasLayer" instance=ExtResource("2_hu5mp")]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -97,6 +98,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 
 [node name="Levels" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -114,7 +116,7 @@ offset_left = -94.0
 offset_top = 40.0
 offset_right = -12.0
 offset_bottom = 79.0
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "play again"
 
@@ -129,9 +131,9 @@ offset_left = 10.0
 offset_top = 40.0
 offset_right = 48.0
 offset_bottom = 83.0
-theme = ExtResource("7_v86rl")
+theme = ExtResource("4_pn5dn")
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "1"
 
@@ -142,7 +144,7 @@ offset_top = 93.0
 offset_right = 49.0
 offset_bottom = 136.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "2"
 
@@ -153,7 +155,7 @@ offset_top = 145.0
 offset_right = 49.0
 offset_bottom = 188.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "3"
 
@@ -164,7 +166,7 @@ offset_top = 201.0
 offset_right = 49.0
 offset_bottom = 244.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "4"
 
@@ -175,7 +177,7 @@ offset_top = 255.0
 offset_right = 49.0
 offset_bottom = 298.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "5"
 
@@ -186,7 +188,7 @@ offset_top = 307.0
 offset_right = 49.0
 offset_bottom = 350.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "6"
 
@@ -197,7 +199,7 @@ offset_top = 363.0
 offset_right = 49.0
 offset_bottom = 406.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "7"
 
@@ -208,11 +210,12 @@ offset_top = 417.0
 offset_right = 49.0
 offset_bottom = 460.0
 theme_override_colors/font_color = Color(0.69803923, 0.6039216, 0.36862746, 1)
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 30
 text = "8"
 
 [node name="Fog" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_4ytvr")
 custom_minimum_size = Vector2(100, 100)
 offset_left = -656.0
@@ -221,7 +224,7 @@ offset_right = 704.0
 offset_bottom = 437.0
 mouse_filter = 2
 
-[node name="OuterCircle" parent="." instance=ExtResource("3_con2f")]
+[node name="OuterCircle" parent="." instance=ExtResource("5_sy34g")]
 position = Vector2(2, 348)
 scale = Vector2(1.2, 1.2)
 enable_rotation = false
@@ -230,16 +233,16 @@ enable_rotation = false
 self_modulate = Color(1, 1, 1, 0.3764706)
 position = Vector2(-49.999992, -40.833324)
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("4_mj5lg")
+texture = ExtResource("6_83t6f")
 
-[node name="Chevron" parent="OuterCircle" instance=ExtResource("4_mhnvy")]
+[node name="Chevron" parent="OuterCircle" instance=ExtResource("7_h1vtx")]
 position = Vector2(-1, -250)
 
-[node name="Collector" parent="OuterCircle" instance=ExtResource("6_g3eks")]
+[node name="Collector" parent="OuterCircle" instance=ExtResource("8_eaqdx")]
 position = Vector2(-1.0000002, -250.99997)
 rotation = -3.1361804
 
-[node name="Source" parent="OuterCircle" instance=ExtResource("6_70i5f")]
+[node name="Source" parent="OuterCircle" instance=ExtResource("9_t8y1r")]
 number_of_rays = 3
 start_angle = -90
 
@@ -251,12 +254,12 @@ default_color = Color(0.45490196, 1, 1, 1)
 
 [node name="Title" type="Label" parent="."]
 self_modulate = Color(0.6973565, 0.604338, 0.36816832, 1)
-offset_left = -583.0
-offset_top = -289.0
-offset_right = 567.0
-offset_bottom = -163.0
-theme = ExtResource("7_v86rl")
-theme_override_fonts/font = ExtResource("8_13sgg")
+offset_left = -578.0
+offset_top = -202.0
+offset_right = 572.0
+offset_bottom = -76.0
+theme = ExtResource("4_pn5dn")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 100
 text = "CLOCKWORK COLLECTOR"
 horizontal_alignment = 1
@@ -266,12 +269,13 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Start" type="Button" parent="."]
+visible = false
 self_modulate = Color(0.6, 0.56078434, 0.45490196, 1)
 offset_left = -80.0
 offset_top = -156.0
 offset_right = 81.0
 offset_bottom = -111.0
-theme_override_fonts/font = ExtResource("8_13sgg")
+theme_override_fonts/font = ExtResource("3_j0e48")
 theme_override_font_sizes/font_size = 40
 text = "Start"
 
@@ -281,9 +285,9 @@ environment = SubResource("Environment_13sgg")
 [node name="Sfx" type="Node" parent="."]
 
 [node name="Click" type="AudioStreamPlayer" parent="Sfx"]
-stream = ExtResource("9_i6lef")
+stream = ExtResource("10_j5env")
 
-[node name="BlockerRing" parent="." instance=ExtResource("9_70i5f")]
+[node name="BlockerRing" parent="." instance=ExtResource("11_4spa3")]
 position = Vector2(0, 350)
 scale = Vector2(0.6, 0.6)
 

@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4j4s0r0gukd3"]
+
+[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="1_xms7m"]
+[ext_resource type="Script" uid="uid://8a6pppacoxe1" path="res://components/DIalog/dialog.gd" id="1_y7ehv"]
+[ext_resource type="FontFile" uid="uid://cv2ttld2pgrrl" path="res://assets/Steamwreck-07pd.ttf" id="2_y7ehv"]
+
+[node name="Panel" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -161.25
+offset_top = -80.75
+offset_right = 161.25
+offset_bottom = 139.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y7ehv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.25
+offset_top = 12.75
+offset_right = 324.5
+offset_bottom = 68.5
+theme = ExtResource("1_xms7m")
+theme_override_fonts/font = ExtResource("2_y7ehv")
+theme_override_font_sizes/font_size = 46
+text = "Back to menu?"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.5764706)
+layout_mode = 0
+offset_left = 0.25
+offset_top = 74.75
+offset_right = 322.5
+offset_bottom = 142.75
+theme = ExtResource("1_xms7m")
+theme_override_constants/line_spacing = -10
+theme_override_fonts/font = ExtResource("2_y7ehv")
+theme_override_font_sizes/font_size = 30
+text = "You'll be able to go to levels you visited again."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 0
+offset_left = 15.25
+offset_top = 153.75
+offset_right = 141.25
+offset_bottom = 205.75
+theme = ExtResource("1_xms7m")
+text = "RESUME"
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 158.25
+offset_top = 154.75
+offset_right = 304.25
+offset_bottom = 206.75
+theme = ExtResource("1_xms7m")
+text = "TO   MENU"
