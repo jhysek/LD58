@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://i3x78bqyfc74"]
+[gd_scene load_steps=24 format=3 uid="uid://i3x78bqyfc74"]
 
 [ext_resource type="Script" uid="uid://u006o2huaftt" path="res://scenes/game.gd" id="1_6oia5"]
 [ext_resource type="PackedScene" uid="uid://d4g312fn0bvrl" path="res://components/Vignette/vignette.tscn" id="2_vsr8y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqxbl5g2mq8ux" path="res://components/OuterCircle/circle.tscn" id="5_7tjgh"]
 [ext_resource type="PackedScene" uid="uid://c5b4kmyq4areg" path="res://components/collector/collector.tscn" id="6_rx41x"]
 [ext_resource type="PackedScene" uid="uid://dekch12eksf1o" path="res://components/chevron/chevron.tscn" id="7_5x58u"]
+[ext_resource type="Theme" uid="uid://c2u68cvn6q7d6" path="res://assets/theme.tres" id="8_6nx31"]
 [ext_resource type="PackedScene" uid="uid://0ph1416mbkin" path="res://components/Block/block.tscn" id="9_p01g4"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="10_fyesu"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="11_jskaa"]
@@ -166,6 +167,16 @@ root_node = NodePath("../Screen")
 libraries = {
 &"": SubResource("AnimationLibrary_6oia5")
 }
+
+[node name="Label" type="Label" parent="."]
+offset_left = 263.0
+offset_top = 191.0
+offset_right = 380.0
+offset_bottom = 238.0
+theme = ExtResource("8_6nx31")
+text = "ROTATING
+OUTER  CIRCLE
+WORKS  TOO"
 
 [connection signal="on_scene_changed" from="." to="." method="_on_on_scene_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

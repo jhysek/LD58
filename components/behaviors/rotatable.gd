@@ -3,7 +3,7 @@ class_name Rotatable
 extends BehaviorResource
 
 var cursor = load("res://assets/cursor-6.png")
-var drag = load("res://assets/drag-cursor.png")
+var grab = load("res://assets/drag-cursor.png")
 
 var rotating = false
 @export var sensitivity = 0.005
@@ -11,16 +11,16 @@ var rotating = false
 func on_grab_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			Input.set_custom_mouse_cursor(drag)
-			character.grab.dragging = true
+			GlobalState.set_dragging(true)
+			Input.set_custom_mouse_cursor(grab)
+			character.stop_sfx()
 			rotating = event.pressed
 
 func on_input(event):
 	if event is InputEventMouseButton:
 		if !event.pressed:
-			print("Setting normal cursor")
+			GlobalState.set_dragging(false)
 			Input.set_custom_mouse_cursor(cursor)
-			character.grab.dragging = false
 			rotating = false
 			
 	elif event is InputEventMouseMotion and rotating:
@@ -30,6 +30,11 @@ func on_input(event):
 		else:
 			character.rotation -= diff
 		
+		if abs(diff) > 0:
+			character.play_sfx()
+		else:
+			character.stop_sfx()
+			
 		rotate_binded(diff)
 		character.on_changed()
 

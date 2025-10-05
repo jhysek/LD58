@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var BehaviorResource = load("res://components/behaviors/behavior_resource.gd")
 @export var grab: Area2D = null
+@export var line: Line2D
 
 enum State {
 	STATIC,
@@ -20,17 +21,21 @@ enum State {
 @export var tutorial = false
 
 var game
-@onready var line = $Line
+@onready var sfx = $Sfx/Dragging
 
 func _ready():
 	game = get_node("/root/Game")
-	
-	if !grab && has_node("Grab"):
+
+	if grab == null && has_node("Grab"):
 		grab = $Grab
-		
-	if !enable_rotation:
-		$Visual/Grab.queue_free()
-		$Visual/Grab2.queue_free()
+			
+	if !enable_rotation && has_node("Visual/Grab"):
+		$Visual/Grab.hide()
+		$Visual/Grab.monitorable = false
+		$Visual/Grab.monitoring = false
+		$Visual/Grab2.hide()
+		$Visual/Grab2.monitorable = false
+		$Visual/Grab2.monitoring = false
 		
 	if tutorial:
 		$AnimationPlayer.play("Pulsate")
@@ -79,6 +84,13 @@ func _on_grab_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> 
 func _on_grab_mouse_entered() -> void:
 	pass # Replace with function body.
 
-
 func _on_grab_mouse_exited() -> void:
 	pass # Replace with function body.
+
+func play_sfx():
+	if sfx && !sfx.playing:
+		sfx.play()
+		
+func stop_sfx():
+	if sfx && sfx.playing:
+		sfx.stop()

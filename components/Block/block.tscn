@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://0ph1416mbkin"]
+[gd_scene load_steps=9 format=3 uid="uid://0ph1416mbkin"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_ngwfw"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_0vh0o"]
 [ext_resource type="Script" uid="uid://clf2nejfhwusp" path="res://components/behaviors/rotatable.gd" id="3_0vh0o"]
 [ext_resource type="Texture2D" uid="uid://c3mx7vsivnjo6" path="res://components/Block/triangle.png" id="4_0vh0o"]
 [ext_resource type="Script" uid="uid://85brna7kpl0d" path="res://components/Grab/grab.gd" id="5_vi1tr"]
+[ext_resource type="AudioStream" uid="uid://dx2lgtg6x5r3k" path="res://assets/clicking1.wav" id="6_7ymwv"]
 
 [sub_resource type="Resource" id="Resource_vi1tr"]
 resource_name = "rotation"
@@ -14,9 +15,10 @@ metadata/_custom_type_script = "uid://clf2nejfhwusp"
 [sub_resource type="CircleShape2D" id="CircleShape2D_0vh0o"]
 radius = 127.00394
 
-[node name="Block" type="CharacterBody2D" groups=["bouncy"]]
+[node name="Block" type="CharacterBody2D" node_paths=PackedStringArray("grab") groups=["bouncy"]]
 rotation = -0.008702602
 script = ExtResource("1_ngwfw")
+grab = NodePath("Grab")
 behaviors = Array[ExtResource("2_0vh0o")]([SubResource("Resource_vi1tr")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -35,6 +37,13 @@ script = ExtResource("5_vi1tr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Grab"]
 shape = SubResource("CircleShape2D_0vh0o")
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("6_7ymwv")
+pitch_scale = 1.13
+max_polyphony = 2
 
 [connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]
 [connection signal="mouse_entered" from="Grab" to="Grab" method="_on_mouse_entered"]

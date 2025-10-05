@@ -1,9 +1,8 @@
 class_name Draggable
 extends BehaviorResource
 
-
 var cursor = load("res://assets/cursor-6.png")
-var drag = load("res://assets/drag-cursor.png")
+var grab = load("res://assets/drag-cursor.png")
 
 @export var max_limit = 100
 @export var min_limit = -100
@@ -13,29 +12,36 @@ var drag = load("res://assets/drag-cursor.png")
 var dragging = false
 
 var start_position: Vector2
+var line
 
 func on_ready(parent):
 	super(parent)
-	draw_line()
+	line = character.line
+	
+	if line:
+		line.global_position = character.global_position
+		draw_line()	
 	start_position = character.global_position
 
 func draw_line():
-	var line = character.line
-	line.add_point(character.global_position + direction.normalized() * min_limit)
-	line.add_point(character.global_position + direction.normalized() * max_limit)
-	line.reparent(character.get_parent())
+	#line.global_position = start_position
+	line.points = []
+	line.add_point(start_position + direction.normalized() * min_limit - direction.normalized() * character.get_node("Visual").texture.get_width() / 1.1)
+	line.add_point(start_position + direction.normalized() * max_limit + direction.normalized() * character.get_node("Visual").texture.get_width() / 1.1)
 	
 func on_grab_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		Input.set_custom_mouse_cursor(drag)
-		character.grab.dragging = true
+		if event.pressed:
+			GlobalState.set_dragging(true)
+			Input.set_custom_mouse_cursor(grab)
 		dragging = event.pressed
 
 func on_input(event):
 	if event is InputEventMouseButton and !event.pressed:
 		print("setting normal cursor")
 		Input.set_custom_mouse_cursor(cursor)
-		character.grab.dragging = false
+		GlobalState.set_dragging(false)
+		character.stop_sfx()
 		dragging = false
 
 	elif event is InputEventMouseMotion and dragging:
@@ -48,5 +54,11 @@ func on_input(event):
 
 		offset_amount = clamp(offset_amount, min_limit, max_limit)
 
+		if abs(offset_amount) > 0:
+			print("OFFSET AMOUNT " + str(offset_amount))
+			character.play_sfx()
+		else:
+			character.stop_sfx()
+			
 		character.global_position = start_position + direction.normalized() * offset_amount
 		character.on_changed()

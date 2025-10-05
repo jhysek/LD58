@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqxbl5g2mq8ux"]
+[gd_scene load_steps=17 format=3 uid="uid://bqxbl5g2mq8ux"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="2_jumii"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="3_g5ifr"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://0fip565wl7mb" path="res://assets/noise2.png" id="7_g5ifr"]
 [ext_resource type="PackedScene" uid="uid://bt2fr1gsx1yfd" path="res://components/inner_circle/inner_circle.tscn" id="8_r8tuq"]
 [ext_resource type="Texture2D" uid="uid://cd5i1nvji8qy5" path="res://components/Coq/coq.png" id="10_yf6va"]
+[ext_resource type="AudioStream" uid="uid://dx2lgtg6x5r3k" path="res://assets/clicking1.wav" id="11_v37tc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g5ifr"]
 blend_mode = 3
@@ -105,12 +106,12 @@ texture = ExtResource("6_v37tc")
 texture_scale = 2.0
 
 [node name="Grab" parent="Visual" instance=ExtResource("5_jumii")]
-position = Vector2(824.9999, 800)
-rotation = 0.7171469
+position = Vector2(837.49994, 800.00006)
+rotation = 0.71714693
 scale = Vector2(0.9999999, 0.9999999)
 
 [node name="Grab2" parent="Visual" instance=ExtResource("5_jumii")]
-position = Vector2(-629.1669, -983.3335)
+position = Vector2(-616.6667, -983.3334)
 rotation = 0.96723175
 scale = Vector2(0.9999999, 0.9999999)
 
@@ -142,6 +143,12 @@ texture = ExtResource("10_yf6va")
 libraries = {
 &"": SubResource("AnimationLibrary_yf6va")
 }
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("11_v37tc")
+pitch_scale = 0.76
 
 [connection signal="input_event" from="Visual/Grab" to="." method="_on_grab_input_event"]
 [connection signal="input_event" from="Visual/Grab2" to="." method="_on_grab_input_event"]

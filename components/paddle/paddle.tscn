@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn7mr3bwjjilc"]
+[gd_scene load_steps=8 format=3 uid="uid://dn7mr3bwjjilc"]
 
 [ext_resource type="Script" uid="uid://cm0bipwvwbcmi" path="res://components/behaviors/behavior.gd" id="1_1hevo"]
 [ext_resource type="Texture2D" uid="uid://csd7f2kxvpc2l" path="res://components/paddle/paddle.png" id="2_kwoxf"]
 [ext_resource type="Script" uid="uid://b75uqrrgkc1h2" path="res://components/behaviors/behavior_resource.gd" id="2_lcsei"]
 [ext_resource type="Resource" uid="uid://dah5lu3pog4ou" path="res://components/behaviors/draggable.tres" id="3_xem4r"]
 [ext_resource type="Script" uid="uid://85brna7kpl0d" path="res://components/Grab/grab.gd" id="5_xem4r"]
+[ext_resource type="AudioStream" uid="uid://df1536bxb36fr" path="res://components/paddle/dragging.wav" id="6_aoyrw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1hevo"]
 size = Vector2(479, 95)
@@ -14,7 +15,10 @@ collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_1hevo")
 grab = NodePath("Grab")
+enable_rotation = null
 behaviors = Array[ExtResource("2_lcsei")]([ExtResource("3_xem4r")])
+state = null
+tutorial = null
 
 [node name="Visual" type="Sprite2D" parent="."]
 texture = ExtResource("2_kwoxf")
@@ -46,10 +50,16 @@ position = Vector2(0.5, 3.5)
 shape = SubResource("RectangleShape2D_1hevo")
 
 [node name="Line" type="Line2D" parent="."]
-default_color = Color(0.42352942, 0.42352942, 0.42352942, 0.6627451)
+default_color = Color(0.20152679, 0.20152655, 0.20152643, 0.8980392)
 joint_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="Sfx" type="Node" parent="."]
+
+[node name="Dragging" type="AudioStreamPlayer" parent="Sfx"]
+stream = ExtResource("6_aoyrw")
+pitch_scale = 1.27
 
 [connection signal="input_event" from="Grab" to="." method="_on_grab_input_event"]
 [connection signal="mouse_entered" from="Grab" to="Grab" method="_on_mouse_entered"]

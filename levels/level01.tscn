@@ -54,7 +54,7 @@ shader_parameter/noise_texture = SubResource("NoiseTexture2D_kvpfn")
 shader_parameter/density = 0.1170000055575
 shader_parameter/speed = Vector2(0, -0.02)
 
-[sub_resource type="Resource" id="Resource_wrqhy"]
+[sub_resource type="Resource" id="Resource_myk8p"]
 resource_name = "rotation"
 script = ExtResource("10_py2r8")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
@@ -65,13 +65,13 @@ max_limit = 50
 min_limit = -50
 metadata/_custom_type_script = "uid://bb7lfwi0214tp"
 
-[sub_resource type="Resource" id="Resource_py2r8"]
+[sub_resource type="Resource" id="Resource_7i3qh"]
 script = ExtResource("12_py2r8")
 max_limit = 50
 min_limit = -50
 metadata/_custom_type_script = "uid://bb7lfwi0214tp"
 
-[sub_resource type="Resource" id="Resource_j5cmh"]
+[sub_resource type="Resource" id="Resource_ta2wi"]
 resource_name = "rotation"
 script = ExtResource("10_py2r8")
 metadata/_custom_type_script = "uid://clf2nejfhwusp"
@@ -165,17 +165,39 @@ rotation = 0.7853982
 scale = Vector2(0.2, 0.2)
 collision_layer = 2
 collision_mask = 2
-behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_wrqhy")])
+behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_myk8p")])
 
-[node name="Paddle" parent="Machine" instance=ExtResource("10_vm8da")]
+[node name="Line2D" type="Line2D" parent="Machine"]
 position = Vector2(107.99999, -98)
 scale = Vector2(0.2, 0.2)
-behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_6q0d3")])
+points = PackedVector2Array(-414.99994, 5, 469.99994, -5)
+width = 20.0
+default_color = Color(0.15686275, 0.15686275, 0.15686275, 0.36862746)
 
-[node name="Paddle2" parent="Machine" instance=ExtResource("10_vm8da")]
+[node name="Line2D2" type="Line2D" parent="Machine"]
+position = Vector2(-117, -99)
+scale = Vector2(0.2, 0.2)
+points = PackedVector2Array(-414.99994, 5, 469.99994, -5)
+width = 20.0
+default_color = Color(0.15686275, 0.15686275, 0.15686275, 0.36862746)
+
+[node name="Paddle" parent="Machine" node_paths=PackedStringArray("line") instance=ExtResource("10_vm8da")]
+position = Vector2(107.99999, -98)
+scale = Vector2(0.2, 0.2)
+line = NodePath("../Line2D")
+enable_rotation = true
+behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_6q0d3")])
+state = 2
+tutorial = false
+
+[node name="Paddle2" parent="Machine" node_paths=PackedStringArray("line") instance=ExtResource("10_vm8da")]
 position = Vector2(-109.99998, -98)
 scale = Vector2(0.2, 0.2)
-behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_py2r8")])
+line = NodePath("../Line2D2")
+enable_rotation = true
+behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_7i3qh")])
+state = 2
+tutorial = false
 
 [node name="Source" parent="Machine" instance=ExtResource("11_lmhrd")]
 number_of_rays = 2
@@ -184,7 +206,7 @@ number_of_rays = 2
 position = Vector2(-165.99998, -3)
 rotation = 1.3089969
 scale = Vector2(0.2, 0.2)
-behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_j5cmh")])
+behaviors = Array[ExtResource("9_j5cmh")]([SubResource("Resource_ta2wi")])
 
 [node name="Info" type="Label" parent="."]
 self_modulate = Color(1, 1, 1, 0.6117647)

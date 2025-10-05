@@ -34,8 +34,7 @@ func cast():
 		
 		if last_hit.has("collider"):
 			exclude = [last_hit.collider]
-			print("collider_id: " + str(last_hit.collider_id) + " RID: " + str(last_hit.collider.get_rid()))
-			
+		
 		var hit = raycast(endpoint, deg_to_rad(angle), exclude)
 		
 		if hit.is_empty():
@@ -68,16 +67,12 @@ func raycast(from_position, angle_radians, excluded_collider_ids):
 	var direction = Vector2.RIGHT.rotated(angle_radians)
 	var to_position = from_position + direction * cast_length
 
-	print("\nCasting a ray from " + str(from_position) + " to " + str(to_position) + " excluding: " + str(excluded_collider_ids))
-	
 	var params = PhysicsRayQueryParameters2D.create(from_position, to_position)
 	params.exclude = excluded_collider_ids
 	var result = space_state.intersect_ray(params)
 	
 	if result.is_empty():
 		return result
-		
-	print("Result: ", result)
 	
 	var normal = result.normal
 	var reflected_dir = direction.bounce(normal)
